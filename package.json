@@ -1,13 +1,13 @@
 {
-  "name": "minecraft-addon",
+  "name": "minecraft_addon",
   "description": "Addon Test",
   "version": "1.0.0",
   "main": "src/main.ts",
   "scripts": {
-    "build": "tsc&&tsx scripts/build.ts"
+    "build": "tsc&&tsx scripts/build.ts",
+    "dev": "tsx watch --include src/**/* --include resource_pack/**/* --include behavior_pack/**/* scripts/dev.ts"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Diego S. Sena",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {

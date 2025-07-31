@@ -1,7 +1,7 @@
 {
   "format_version": 2,
   "header": {
-    "name": "minecraft-addon",
+    "name": "minecraft_addon",
     "description": "Addon Test",
     "uuid": "9d6dad89-6e29-46ba-83d5-490a4901caef",
     "version": [

@@ -1,0 +1,3 @@
+%LOCALAPPDATA%\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang
+development_behavior_packs
+development_resource_packs
