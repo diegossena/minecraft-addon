@@ -1,0 +1,26 @@
+{
+  "name": "minecraft-addon",
+  "description": "Addon Test",
+  "version": "1.0.0",
+  "main": "src/main.ts",
+  "scripts": {
+    "build": "tsc&&tsx scripts/build.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@minecraft/math": "^2.2.8",
+    "@minecraft/server": "^2.0.0",
+    "@minecraft/server-gametest": "^1.0.0-beta.1.21.60-preview.24",
+    "@minecraft/server-ui": "^2.0.0",
+    "@minecraft/vanilla-data": "^1.21.93",
+    "zip-lib": "^1.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}
