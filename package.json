@@ -1,11 +1,12 @@
 {
-  "name": "minecraft_addon",
+  "name": "stk",
   "description": "Addon Test",
   "version": "1.0.0",
   "main": "src/main.ts",
   "scripts": {
+    "uuid": "tsx scripts/uuid.ts",
     "build": "tsc&&tsx scripts/build.ts",
-    "dev": "tsx watch --include src/**/* --include resource_pack/**/* --include behavior_pack/**/* scripts/dev.ts"
+    "dev": "tsx scripts/manifest.ts&&tsx watch --include src/**/* --include resource_pack/**/* --include behavior_pack/**/* scripts/dev.ts"
   },
   "author": "Diego S. Sena",
   "license": "ISC",
@@ -16,6 +17,9 @@
     "@minecraft/server-gametest": "^1.0.0-beta.1.21.60-preview.24",
     "@minecraft/server-ui": "^2.0.0",
     "@minecraft/vanilla-data": "^1.21.93",
+    "@react-facet/core": "^0.6.4",
+    "@react-facet/dom-fiber": "^0.6.4",
+    "uuid": "^11.1.0",
     "zip-lib": "^1.1.2"
   },
   "devDependencies": {

@@ -4,8 +4,6 @@ import { spawn, exec } from 'child_process'
 import assert from 'assert'
 import package_json from '../package.json'
 import { promisify } from 'util'
-// import behavior_manifest from '../behavior_pack/manifest.json'
-// import resource_manifest from '../resource_pack/manifest.json'
 
 assert(process.env['LOCALAPPDATA'])
 

@@ -1,9 +1,9 @@
 {
   "format_version": 2,
   "header": {
-    "name": "minecraft_addon",
+    "name": "stk",
     "description": "Addon Test",
-    "uuid": "9ec8af93-4b38-429f-a4bd-7e277a50d238",
+    "uuid": "a4bc878c-5049-4475-9ead-352c8386836b",
     "version": [
       1,
       0,
@@ -17,7 +17,6 @@
   },
   "modules": [
     {
-      "description": "Behavior",
       "version": [
         1,
         0,
@@ -27,7 +26,6 @@
       "type": "data"
     },
     {
-      "description": "Script resources",
       "language": "javascript",
       "type": "script",
       "uuid": "f43bb32a-c814-45e4-a428-3f4f1f59b2a3",
@@ -41,8 +39,12 @@
   ],
   "dependencies": [
     {
-      "uuid": "9d6dad89-6e29-46ba-83d5-490a4901caef",
-      "version": "1.0.0"
+      "uuid": "84f286e7-27ee-4f86-9f32-20aba150776b",
+      "version": [
+        1,
+        0,
+        0
+      ]
     },
     {
       "module_name": "@minecraft/server",

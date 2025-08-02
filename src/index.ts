@@ -1,9 +1,9 @@
-import { world, system } from '@minecraft/server'
+import { world } from '@minecraft/server'
+import * as menu from 'menu'
 
-function main_tick() {
-  if (system.currentTick % 100 === 0) {
-    world.sendMessage('Test4 Tick: ' + system.currentTick)
-  }
-  system.run(main_tick)
-}
-system.run(main_tick)
+world.afterEvents.playerSpawn.subscribe(event => {
+  menu.onplayerspawn(event)
+})
+world.beforeEvents.itemUse.subscribe(event => {
+  menu.onitemuse(event)
+})

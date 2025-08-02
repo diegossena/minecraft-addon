@@ -1,0 +1,13 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.hidden",
+        "texture_width": 1,
+        "texture_height": 1
+      },
+      "bones": []
+    }
+  ]
+}

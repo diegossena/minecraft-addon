@@ -1,0 +1,20 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "stk:menu",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/hidden"
+      },
+      "geometry": {
+        "default": "geometry.hidden"
+      },
+      "render_controllers": [
+        "controller.render.hidden"
+      ]
+    }
+  }
+}
