@@ -1,0 +1,111 @@
+{
+  "namespace": "modal_status",
+  "container@sao_form.action": {
+    "$child_control": "modal_status.scrolling_panel",
+    "$custom_title_label": "modal_status.title_label",
+    "$use_custom_title_control": true
+  },
+  "title_label@common_dialogs.standard_title_label": {
+    "text": "#form_button_text",
+    "bindings": [
+      {
+        "binding_name": "#form_button_text",
+        "binding_type": "collection",
+        "binding_collection_name": "form_buttons"
+      }
+    ]
+  },
+  "scrolling_panel@common.scrolling_panel": {
+    "anchor_to": "top_left",
+    "anchor_from": "top_left",
+    "size": [
+      "100%",
+      "100%"
+    ],
+    "$show_background": false,
+    "$scrolling_content": "modal_status.scrolling_content",
+    "$scroll_size": [
+      5,
+      "100% - 4px"
+    ],
+    "$scrolling_pane_size": [
+      "100% - 4px",
+      "100% - 2px"
+    ],
+    "$scrolling_pane_offset": [
+      5,
+      10
+    ],
+    "$scroll_bar_right_padding_size": [
+      0,
+      0
+    ]
+  },
+  "scrolling_content": {
+    "type": "stack_panel",
+    "size": [
+      "100% - 4px",
+      "100%c"
+    ],
+    "collection_name": "form_buttons",
+    "controls": [
+      {
+        "description_label": {
+          "type": "label",
+          "size": [
+            "100%",
+            "default"
+          ],
+          "color": "$color",
+          "text": "#form_text"
+        }
+      },
+      {
+        "button_1@modal_status.button": {
+          "collection_index": 1
+        }
+      },
+      {
+        "button_2@modal_status.button": {
+          "collection_index": 2
+        }
+      }
+    ]
+  },
+  "hidden_button@common_buttons.underline_button": {
+    "size": [
+      1,
+      1
+    ]
+  },
+  "button@common_buttons.light_text_button": {
+    "size": [
+      14,
+      14
+    ],
+    "pressed_control": "pressed",
+    "$pressed_button_name": "button.form_button_click",
+    "$button_type_panel": "modal_status.button_label",
+    "$border_visible": false,
+    "$default_button_texture": "textures/buttons/button_blue_plus",
+    "$hover_button_texture": "textures/buttons/button_blue_plus_hover"
+  },
+  "button_label": {
+    "type": "label",
+    "offset": [
+      14,
+      0
+    ],
+    "color": "$color",
+    "anchor_from": "left_middle",
+    "anchor_to": "left_middle",
+    "text": "#form_button_text",
+    "bindings": [
+      {
+        "binding_name": "#form_button_text",
+        "binding_type": "collection",
+        "binding_collection_name": "form_buttons"
+      }
+    ]
+  }
+}

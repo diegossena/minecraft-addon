@@ -1,24 +1,21 @@
 {
-  "name": "stk",
-  "description": "Addon Test",
+  "name": "sword_art_online",
+  "description": "Sword Art Online",
   "version": "1.0.0",
   "main": "src/main.ts",
+  "author": "Diego S. Sena",
+  "license": "ISC",
+  "type": "commonjs",
   "scripts": {
     "uuid": "tsx scripts/uuid.ts",
     "build": "tsc&&tsx scripts/build.ts",
     "dev": "tsx scripts/manifest.ts&&tsx watch --include src/**/* --include resource_pack/**/* --include behavior_pack/**/* scripts/dev.ts"
   },
-  "author": "Diego S. Sena",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "@minecraft/math": "^2.2.8",
     "@minecraft/server": "^2.0.0",
-    "@minecraft/server-gametest": "^1.0.0-beta.1.21.60-preview.24",
     "@minecraft/server-ui": "^2.0.0",
     "@minecraft/vanilla-data": "^1.21.93",
-    "@react-facet/core": "^0.6.4",
-    "@react-facet/dom-fiber": "^0.6.4",
     "uuid": "^11.1.0",
     "zip-lib": "^1.1.2"
   },

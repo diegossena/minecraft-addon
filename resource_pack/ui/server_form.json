@@ -1,42 +1,22 @@
 {
-  "third_party_server_screen@common.base_screen": {
-    "$screen_content": "server_form.main_screen_content",
-    "force_render_below": true,
-    "low_frequency_rendering": true,
-    "render_only_when_topmost": false,
-    "render_game_behind": true,
-    "button_mappings": [
+  // ActionForm
+  "sao_long_form": {
+    "type": "panel",
+    "controls": [
       {
-        "from_button_id": "button.menu_cancel",
-        "to_button_id": "button.menu_exit",
-        "mapping_type": "global"
+        "status@modal_status.container": {
+          "bindings": [
+            {
+              "binding_type": "view",
+              "source_property_name": "(#title_text = 'sao.ui.main')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
       }
     ]
   },
-  "stk_background_blue": {
-    "type": "image",
-    "texture": "$background_texture",
-    "$background_texture|default": "textures/backgrounds/blue"
-  },
-  "action_form@server_form.long_form": {
-    "size": [
-      275,
-      175
-    ],
-    "$child_control": "modal_status.container",
-    "$custom_background": "server_form.stk_background_blue",
-    "bindings": [
-      {
-        "binding_name": "#title_text" // We define the title text inside the parent so we don't need to call it everytime we use it
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#title_text = 'stk.ui.main')",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  // long_form hidden
+  // Main
   "long_form": {
     "modifications": [
       {
@@ -48,10 +28,45 @@
           },
           {
             "binding_type": "view",
-            "source_property_name": "((#title_text - 'stk.ui') = #title_text)",
+            "source_property_name": "((#title_text - 'sao.ui') = #title_text)",
             "target_property_name": "#visible"
           }
         ]
+      }
+    ]
+  },
+  "screen_exit_animation_pop_wait": {
+    "anim_type": "offset",
+    "easing": "linear",
+    "duration": 0.1,
+    "from": [
+      0,
+      0
+    ],
+    "to": [
+      0,
+      0
+    ],
+    "play_event": "screen.exit_pop",
+    "end_event": "screen.exit_end"
+  },
+  "third_party_server_screen@common.base_screen": {
+    "$screen_content": "server_form.main_screen_content",
+    "force_render_below": true,
+    "low_frequency_rendering": true,
+    "render_only_when_topmost": false,
+    "render_game_behind": true,
+    "$screen_animations": [
+      "@server_form.screen_exit_animation_pop_wait"
+    ],
+    "$background_animations": [
+      "@server_form.screen_exit_animation_pop_wait"
+    ],
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_cancel",
+        "to_button_id": "button.menu_exit",
+        "mapping_type": "global"
       }
     ]
   },
@@ -62,12 +77,12 @@
         "operation": "insert_back",
         "value": [
           {
-            "stk_server_form_factory": {
+            "sao_server_form_factory": {
               "type": "panel",
               "factory": {
                 "name": "server_form_factory",
                 "control_ids": {
-                  "long_form": "@server_form.action_form"
+                  "long_form": "@server_form.sao_long_form"
                 }
               }
             }

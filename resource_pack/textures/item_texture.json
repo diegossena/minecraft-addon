@@ -1,9 +1,9 @@
 {
-  "resource_pack_name": "stk",
+  "resource_pack_name": "sao",
   "texture_name": "atlas.items",
   "texture_data": {
     "menu": {
-      "textures": "textures/icons/menu"
+      "textures": "textures/icons/test_menu"
     }
   }
 }

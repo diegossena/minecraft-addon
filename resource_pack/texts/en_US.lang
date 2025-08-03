@@ -1,3 +1,11 @@
 ## Items
 
-item.stk:menu=Menu
+item.sao:menu=Menu
+
+## cursors
+
+sao.cursor.green=§2Green
+
+## forms
+
+sao.ui.status.text=Level:%sXP:%sCursor:%sAttributes:
