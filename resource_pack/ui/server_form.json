@@ -1,22 +1,5 @@
 {
-  // ActionForm
-  "sao_long_form": {
-    "type": "panel",
-    "controls": [
-      {
-        "status@modal_status.container": {
-          "bindings": [
-            {
-              "binding_type": "view",
-              "source_property_name": "(#title_text = 'sao.ui.main')",
-              "target_property_name": "#visible"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  // Main
+  // default_long_form
   "long_form": {
     "modifications": [
       {
@@ -35,6 +18,29 @@
       }
     ]
   },
+  // screen_main
+  "main_screen_content": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_back",
+        "value": [
+          {
+            "sao_server_form_factory": {
+              "type": "panel",
+              "factory": {
+                "name": "server_form_factory",
+                "control_ids": {
+                  "long_form": "@sao_components.modal"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  // screen
   "screen_exit_animation_pop_wait": {
     "anim_type": "offset",
     "easing": "linear",
@@ -67,27 +73,6 @@
         "from_button_id": "button.menu_cancel",
         "to_button_id": "button.menu_exit",
         "mapping_type": "global"
-      }
-    ]
-  },
-  "main_screen_content": {
-    "modifications": [
-      {
-        "array_name": "controls",
-        "operation": "insert_back",
-        "value": [
-          {
-            "sao_server_form_factory": {
-              "type": "panel",
-              "factory": {
-                "name": "server_form_factory",
-                "control_ids": {
-                  "long_form": "@server_form.sao_long_form"
-                }
-              }
-            }
-          }
-        ]
       }
     ]
   }

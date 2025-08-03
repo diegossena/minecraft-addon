@@ -1,7 +1,7 @@
 {
   "ui_defs": [
-    "ui/menu/status.json",
-    "ui/sao_server_form.json",
+    "ui/components.json",
+    "ui/modal_status.json",
     "ui/server_form.json"
   ]
 }

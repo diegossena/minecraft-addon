@@ -1,6 +1,7 @@
 import {
   ItemStack, ItemTypes, ItemLockMode, PlayerSpawnAfterEvent, ItemUseBeforeEvent,
-  system
+  system,
+  world
 } from '@minecraft/server'
 import { ActionFormData } from '@minecraft/server-ui'
 import { item_t, cursor_t } from 'types'
@@ -54,9 +55,12 @@ export function onitemuse(event: ItemUseBeforeEvent) {
     .button("AGI")
   function display_form() {
     form.show(source).then(response => {
-      if (response.canceled)
-        return
-      display_form()
+      world.sendMessage(`cancelationReason ${response.cancelationReason}`)
+      world.sendMessage(`selection ${response.selection}`)
+      world.sendMessage(`canceled ${response.canceled}`)
+      if (!response.canceled) {
+        display_form()
+      }
     })
   }
   system.run(display_form)

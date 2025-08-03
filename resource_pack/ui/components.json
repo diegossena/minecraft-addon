@@ -1,0 +1,41 @@
+{
+  "namespace": "sao_components",
+  "modal": {
+    "type": "panel",
+    "controls": [
+      {
+        "status@sao_modal_status.container": {
+          "bindings": [
+            {
+              "binding_type": "view",
+              "source_property_name": "(#title_text = 'sao.ui.main')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "button_hidden@common_buttons.underline_button": {
+    "size": [
+      1,
+      1
+    ]
+  },
+  "action_form@server_form.long_form": {
+    "size": [
+      275,
+      175
+    ],
+    "$color": [
+      130,
+      130,
+      130
+    ],
+    "$custom_background": "sao_components.background"
+  },
+  "background": {
+    "type": "image",
+    "texture": "textures/dialog/main_dialog"
+  }
+}

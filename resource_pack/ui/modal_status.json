@@ -1,8 +1,8 @@
 {
-  "namespace": "modal_status",
-  "container@sao_form.action": {
-    "$child_control": "modal_status.scrolling_panel",
-    "$custom_title_label": "modal_status.title_label",
+  "namespace": "sao_modal_status",
+  "container@sao_components.action_form": {
+    "$child_control": "sao_modal_status.scrolling_panel",
+    "$custom_title_label": "sao_modal_status.title_label",
     "$use_custom_title_control": true
   },
   "title_label@common_dialogs.standard_title_label": {
@@ -23,7 +23,7 @@
       "100%"
     ],
     "$show_background": false,
-    "$scrolling_content": "modal_status.scrolling_content",
+    "$scrolling_content": "sao_modal_status.scrolling_content",
     "$scroll_size": [
       5,
       "100% - 4px"
@@ -61,21 +61,18 @@
         }
       },
       {
-        "button_1@modal_status.button": {
+        "button_0@sao_components.button_hidden": {}
+      },
+      {
+        "button_1@sao_modal_status.button": {
           "collection_index": 1
         }
       },
       {
-        "button_2@modal_status.button": {
+        "button_2@sao_modal_status.button": {
           "collection_index": 2
         }
       }
-    ]
-  },
-  "hidden_button@common_buttons.underline_button": {
-    "size": [
-      1,
-      1
     ]
   },
   "button@common_buttons.light_text_button": {
@@ -85,10 +82,16 @@
     ],
     "pressed_control": "pressed",
     "$pressed_button_name": "button.form_button_click",
-    "$button_type_panel": "modal_status.button_label",
+    "$button_type_panel": "sao_modal_status.button_label",
     "$border_visible": false,
     "$default_button_texture": "textures/buttons/button_blue_plus",
-    "$hover_button_texture": "textures/buttons/button_blue_plus_hover"
+    "$hover_button_texture": "textures/buttons/button_blue_plus_hover",
+    "bindings": [
+      {
+        "binding_type": "collection_details",
+        "binding_collection_name": "form_buttons"
+      }
+    ]
   },
   "button_label": {
     "type": "label",
