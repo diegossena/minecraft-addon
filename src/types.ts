@@ -5,9 +5,6 @@
  * Bônus de Defesa da Arma: 1,50
  * Bônus de Tempo de Recarga: 1,20.
  * 
- * Drops
- * Exp, Col, Items
- * 
  * 
  * Força (FOR): Seu nível afeta sua força e faz com que os itens pareçam mais
  * leves para segurar/levantar/carregar. Uma força alta permite que você levante
@@ -26,20 +23,11 @@
  * em que foi concluído, embora se o jogo tivesse continuado e um limite fosse
  * necessário, o Sistema Cardinal teria gerado um.
  * 
- * HP
- * LvL 1 250
- * LvL 40 8120
- * LvL 48 9560
- * lvl 70 13126
- * lvl 78 14500
- * lvl 96 18500
- * 
  * Items:
  * 
  * Ring of Agility
  * +20 AGI
  */
-
 
 /**
  * 3 attributes per level

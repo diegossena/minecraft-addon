@@ -50,13 +50,7 @@
     "collection_name": "form_buttons",
     "controls": [
       {
-        "description_label": {
-          "type": "label",
-          "size": [
-            "100%",
-            "default"
-          ],
-          "color": "$color",
+        "description_label@sao_modal_status.label": {
           "text": "#form_text"
         }
       },
@@ -71,6 +65,19 @@
       {
         "button_2@sao_modal_status.button": {
           "collection_index": 2
+        }
+      },
+      {
+        "label_3@sao_modal_status.button_label": {
+          "collection_index": 3,
+          "text": "#form_button_text",
+          "bindings": [
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "form_buttons",
+              "binding_name": "#form_button_text"
+            }
+          ]
         }
       }
     ]
@@ -92,6 +99,15 @@
         "binding_collection_name": "form_buttons"
       }
     ]
+  },
+  "label": {
+    "type": "label",
+    "text_alignment": "center",
+    "size": [
+      "100%",
+      "default"
+    ],
+    "color": "$color"
   },
   "button_label": {
     "type": "label",

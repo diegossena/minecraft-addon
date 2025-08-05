@@ -1,21 +1,5 @@
 {
   "namespace": "sao_components",
-  "modal": {
-    "type": "panel",
-    "controls": [
-      {
-        "status@sao_modal_status.container": {
-          "bindings": [
-            {
-              "binding_type": "view",
-              "source_property_name": "(#title_text = 'sao.ui.main')",
-              "target_property_name": "#visible"
-            }
-          ]
-        }
-      }
-    ]
-  },
   "button_hidden@common_buttons.underline_button": {
     "size": [
       1,
@@ -23,9 +7,13 @@
     ]
   },
   "action_form@server_form.long_form": {
+    // "size": [
+    //   275,
+    //   175
+    // ],
     "size": [
-      275,
-      175
+      160,
+      200
     ],
     "$color": [
       130,

@@ -1,0 +1,39 @@
+{
+  "root_panel": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": [
+          {
+            "stats_bar@sao_stats_bar.main": {}
+          },
+          {
+            "sao_chat_stack": {
+              "type": "stack_panel",
+              "size": [
+                "37%",
+                "0%"
+              ],
+              "anchor_from": "bottom_left",
+              "anchor_to": "bottom_left",
+              "controls": [
+                {
+                  "chat_panel@hud.chat_panel": {}
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "control_name": "chat_stack",
+        "operation": "remove"
+      }
+    ]
+  },
+  "heart_renderer": {
+    "visible": false,
+    "bindings": []
+  }
+}

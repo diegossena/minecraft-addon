@@ -1,7 +1,8 @@
 {
   "ui_defs": [
+    "ui/commom_bar.json",
     "ui/components.json",
     "ui/modal_status.json",
-    "ui/server_form.json"
+    "ui/hud_stats_bar.json"
   ]
 }

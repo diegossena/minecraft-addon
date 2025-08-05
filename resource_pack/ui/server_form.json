@@ -1,4 +1,20 @@
 {
+  "sao_modal": {
+    "type": "panel",
+    "controls": [
+      {
+        "status@sao_modal_status.container": {
+          "bindings": [
+            {
+              "binding_type": "view",
+              "source_property_name": "(#title_text = 'sao.ui.main')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      }
+    ]
+  },
   // default_long_form
   "long_form": {
     "modifications": [
@@ -31,7 +47,7 @@
               "factory": {
                 "name": "server_form_factory",
                 "control_ids": {
-                  "long_form": "@sao_components.modal"
+                  "long_form": "@server_form.sao_modal"
                 }
               }
             }

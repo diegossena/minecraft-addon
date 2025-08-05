@@ -1,11 +1,16 @@
-## Items
+## entities
+
+entity.sao:frenzy_boar.name=Frenzy Boar
+
+## items
 
 item.sao:menu=Menu
 
+item.spawn_egg.entity.sao:frenzy_boar.name=Frenzy Boar Spawn Egg
 ## cursors
 
 sao.cursor.green=§2Green
 
-## forms
+## modals
 
-sao.ui.status.text=Level:%sXP:%sCursor:%sAttributes:
+sao.ui.status.text=Level%sXP%sHealth%sCursor%sSP%s

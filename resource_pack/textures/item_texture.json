@@ -4,6 +4,9 @@
   "texture_data": {
     "menu": {
       "textures": "textures/icons/test_menu"
+    },
+    "spawn_egg_frenzy_boar": {
+      "textures": "textures/items/spawn_eggs/spawn_egg_frenzy_boar"
     }
   }
 }
