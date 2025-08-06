@@ -1,19 +1,11 @@
 {
   "format_version": "1.8.0",
   "render_controllers": {
-    "controller.render.health_bar": {
-      "geometry": "Geometry.health_bar",
+    "controller.render.sao_health_bar": {
+      "geometry": "Geometry.sao_health_bar",
       "textures": [
-        "Texture.health_bar_100"
-        // "Array.textures[variable.health]"
+        "Texture.sao_health_bar"
       ],
-      "arrays": {
-        "textures": {
-          "array.textures": [
-            "Texture.health_bar_100"
-          ]
-        }
-      },
       "materials": [
         {
           "*": "Material.default"

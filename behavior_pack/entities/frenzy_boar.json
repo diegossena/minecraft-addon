@@ -5,13 +5,7 @@
       "identifier": "sao:frenzy_boar",
       "spawn_category": "creature",
       "is_spawnable": true,
-      "is_summonable": true,
-      "properties": {
-        "sao:level": {
-          "type": "int",
-          "default": 1
-        }
-      }
+      "is_summonable": true
     },
     "component_groups": {
       "sao:level_1": {

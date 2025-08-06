@@ -8,11 +8,11 @@
       },
       "textures": {
         "default": "textures/entity/frenzy_boar",
-        "health_bar_100": "textures/ui/health_bar"
+        "sao_health_bar": "textures/ui/health_bar"
       },
       "geometry": {
         "default": "geometry.hoglin",
-        "health_bar": "geometry.health_bar"
+        "sao_health_bar": "geometry.sao_health_bar"
       },
       "spawn_egg": {
         "texture": "spawn_egg_frenzy_boar"
@@ -47,7 +47,7 @@
       ],
       "render_controllers": [
         "controller.render.hoglin",
-        "controller.render.health_bar"
+        "controller.render.sao_health_bar"
       ]
     }
   }
