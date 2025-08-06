@@ -19,12 +19,6 @@
           "*": "Material.default"
         }
       ],
-      "is_hurt_color": {
-        "r": "0",
-        "g": "0",
-        "b": "0",
-        "a": "0"
-      },
       "part_visibility": [
         {
           "*": "q.distance_from_camera<=10&&q.is_alive",
