@@ -14,9 +14,12 @@
       }
     },
     "component_groups": {
-      "sao_level_1": {
-        "minecraft:loot": "loot_tables/frenzy_boar.json",
+      "sao:level_1": {
         // "sao:col": 30,
+        "minecraft:health": {
+          "value": 130,
+          "max": 130
+        },
         "minecraft:experience_reward": {
           "on_death": "query.last_hit_by_player ? Math.Random(4,7) : 0"
         },
@@ -33,17 +36,20 @@
           "value": 0
         }
       },
-      "sao_level_7": {
+      "sao:level_7": {
         "minecraft:variant": {
           "value": 1
         },
+        "minecraft:health": {
+          "value": 300,
+          "max": 300
+        },
         // "sao:col": 30,
-        "minecraft:loot": "loot_tables/frenzy_boar.json",
         "minecraft:experience_reward": {
           "on_death": "query.last_hit_by_player ? Math.Random(24,23) : 0"
         },
         "minecraft:scale": {
-          "value": 0.5
+          "value": 1.0
         },
         "minecraft:movement": {
           "value": 0.35
@@ -54,8 +60,8 @@
       }
     },
     "components": {
-      "minecraft:experience_reward": {
-        "on_death": "query.last_hit_by_player ? Math.Random(1,3) : 0"
+      "minecraft:loot": {
+        "table": "loot_tables/frenzy_boar.json"
       },
       "minecraft:is_hidden_when_invisible": {},
       "minecraft:type_family": {
@@ -71,10 +77,6 @@
       },
       "minecraft:nameable": {
         "always_show": true
-      },
-      "minecraft:health": {
-        "value": 300,
-        "max": 300
       },
       "minecraft:hurt_on_condition": {
         "damage_conditions": [
@@ -171,16 +173,20 @@
           {
             "randomize": [
               {
-                "weight": 60,
-                "component_groups": [
-                  "sao_level_1"
-                ]
+                "weight": 70,
+                "add": {
+                  "component_groups": [
+                    "sao:level_1"
+                  ]
+                }
               },
               {
-                "weight": 40,
-                "component_groups": [
-                  "sao_level_7"
-                ]
+                "weight": 30,
+                "add": {
+                  "component_groups": [
+                    "sao:level_7"
+                  ]
+                }
               }
             ]
           }

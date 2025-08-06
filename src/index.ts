@@ -73,11 +73,8 @@ world.afterEvents.entityHealthChanged.subscribe(event => {
   const damage = Math.floor(newValue - oldValue)
   const color = damage < 0 ? '§e' : '§a'
   const signal = damage < 0 ? '' : '+'
-  const variant = entity.getComponent('minecraft:variant')
   const mob_health = entity.getComponent('minecraft:health')
   // entity.name
-  world.sendMessage(`${entity.typeId} variant ${variant?.value}`)
-  entity.nameTag = `§l${entity.typeId} (${mob_health.currentValue}/${mob_health.effectiveMax})`
   const damage_indicator = entity.dimension.spawnEntity(<any>'sao:damage_indicator', entity.location)
   damage_indicator.nameTag = `§l${color}${signal}${damage}`
   damage_indicator.applyImpulse({

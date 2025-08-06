@@ -7,10 +7,12 @@
         "default": "hoglin"
       },
       "textures": {
-        "default": "textures/entity/frenzy_boar"
+        "default": "textures/entity/frenzy_boar",
+        "health_bar_100": "textures/ui/health_bar"
       },
       "geometry": {
-        "default": "geometry.hoglin"
+        "default": "geometry.hoglin",
+        "health_bar": "geometry.health_bar"
       },
       "spawn_egg": {
         "texture": "spawn_egg_frenzy_boar"
@@ -19,7 +21,8 @@
         "pre_animation": [
           "variable.tcos_right_side = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / variable.gliding_speed_value) * 57.3;",
           "variable.tcos_left_side = -variable.tcos_right_side;",
-          "variable.attack_head_rot =  Math.sin(variable.attack_time * 180.0) * -37.3;"
+          "variable.attack_head_rot =  Math.sin(variable.attack_time * 180.0) * -37.3;",
+          "variable.health=math.round(q.health/q.max_health*100);"
         ]
       },
       "animations": {
@@ -43,7 +46,8 @@
         }
       ],
       "render_controllers": [
-        "controller.render.hoglin"
+        "controller.render.hoglin",
+        "controller.render.health_bar"
       ]
     }
   }

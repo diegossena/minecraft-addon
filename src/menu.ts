@@ -2,6 +2,8 @@ import {
   ItemStack, ItemTypes, ItemLockMode,
   system,
   Player,
+  EntityComponentTypes,
+  world,
 } from '@minecraft/server'
 import { ActionFormData, ActionFormResponse } from '@minecraft/server-ui'
 import { player_agility_get, player_agility_set, player_hp_get, player_level_get, player_level_to_xp, player_max_hp_get, player_stat_points_get, player_stat_points_set, player_strenght_get, player_strenght_set, player_xp_get } from 'player'

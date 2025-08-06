@@ -3,15 +3,18 @@ import { EntityComponentTypes, Player } from '@minecraft/server'
 export const MAX_LEVEL = 220
 
 export function player_inicialize(player: Player) {
-  if (!player_level_get(player)) {
+  let max_health = player_max_hp_get(player)
+  if (!max_health) {
     player_level_set(player, 1)
     player_xp_set(player, 0)
-    player_max_hp_set(player, player_hp_from_level(1))
+    max_health = player_hp_from_level(1)
+    player_max_hp_set(player, max_health)
     player_strenght_set(player, 1)
     player_agility_set(player, 1)
     player_stat_points_set(player, 0)
     player_skill_slots_set(player, player_skill_slots_from_level(1))
   }
+  player_hp_set(player, max_health)
   player_health_bar_update(player)
 }
 
@@ -58,6 +61,10 @@ export function player_stat_points_set(player: Player, value: number) {
 export function player_hp_get(player: Player) {
   const health = player.getComponent(EntityComponentTypes.Health)
   return <number>health.currentValue
+}
+export function player_hp_set(player: Player, value: number) {
+  const health = player.getComponent(EntityComponentTypes.Health)
+  health.setCurrentValue(value)
 }
 // max_hp
 export function player_max_hp_get(player: Player) {
