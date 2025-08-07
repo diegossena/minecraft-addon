@@ -13,7 +13,7 @@
       ],
       "part_visibility": [
         {
-          "*": true
+          "*": "v.look_at_entity"
         }
       ]
     }
