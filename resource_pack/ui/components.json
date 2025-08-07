@@ -25,5 +25,27 @@
   "background": {
     "type": "image",
     "texture": "textures/dialog/main_dialog"
+  },
+  "subtitle_data_control": {
+    "type": "panel",
+    "size": [
+      0,
+      0
+    ],
+    "bindings": [
+      {
+        "binding_name": "#hud_subtitle_text_string"
+      },
+      {
+        "binding_name": "#hud_subtitle_text_string",
+        "binding_name_override": "#preserved_text",
+        "binding_condition": "visibility_changed"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not (#hud_subtitle_text_string = #preserved_text) and not ((#hud_subtitle_text_string - $prefix) = #hud_subtitle_text_string))",
+        "target_property_name": "#visible"
+      }
+    ]
   }
 }

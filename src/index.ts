@@ -5,6 +5,7 @@ import { player_hp_get, player_hp_set, player_inicialize, player_max_hp_get, pla
 import { item_t } from 'types'
 import { random_range } from 'utils/math'
 import { tooltip_damage_indicator, tooltip_display_name } from 'tooltip'
+import { clamp } from 'utils/number'
 
 system.beforeEvents.startup.subscribe(event => {
   const { customCommandRegistry } = event
@@ -80,10 +81,8 @@ world.afterEvents.entityHealthChanged.subscribe(event => {
   // player_health_cap
   if (entity.typeId === MinecraftEntityTypes.Player) {
     const player = <Player>entity
-    const max_hp = player_max_hp_get(player)
-    if (newValue > max_hp) {
-      return player_hp_set(player, max_hp)
-    }
+    const hp = clamp(newValue, 0, player_max_hp_get(player))
+    player_hp_set(player, hp)
   }
   tooltip_damage_indicator(entity, Math.floor(newValue - oldValue))
 })

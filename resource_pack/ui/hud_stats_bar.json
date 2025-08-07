@@ -80,7 +80,7 @@
     "alpha": 0.8,
     "controls": [
       {
-        "$prefix@sao_stats_bar.subtitle_data_control": {}
+        "$prefix@sao_components.subtitle_data_control": {}
       }
     ],
     "bindings": [
@@ -116,9 +116,6 @@
     "$bar_layer|default": 0,
     "$bar_clip_direction|default": "left",
     "controls": [
-      {
-        "$prefix@sao_stats_bar.title_data_control": {}
-      },
       {
         "0@sao_stats_bar.bar_image": {
           "$condition": "($prefix + '0')",
@@ -741,58 +738,11 @@
     "clip_direction": "$bar_clip_direction",
     "bindings": [
       {
-        "binding_type": "view",
-        "source_control_name": "$prefix",
-        "source_property_name": "#preserved_text",
-        "target_property_name": "#text"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#text = $condition)",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "title_data_control": {
-    "type": "panel",
-    "size": [
-      0,
-      0
-    ],
-    "bindings": [
-      {
         "binding_name": "#hud_title_text_string"
       },
       {
-        "binding_name": "#hud_title_text_string",
-        "binding_name_override": "#preserved_text",
-        "binding_condition": "visibility_changed"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(not (#hud_title_text_string = #preserved_text) and not ((#hud_title_text_string - $prefix) = #hud_title_text_string))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "subtitle_data_control": {
-    "type": "panel",
-    "size": [
-      0,
-      0
-    ],
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_name": "#hud_subtitle_text_string",
-        "binding_name_override": "#preserved_text",
-        "binding_condition": "visibility_changed"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(not (#hud_subtitle_text_string = #preserved_text) and not ((#hud_subtitle_text_string - $prefix) = #hud_subtitle_text_string))",
+        "source_property_name": "(not((#hud_title_text_string - $condition) = #hud_title_text_string))",
         "target_property_name": "#visible"
       }
     ]

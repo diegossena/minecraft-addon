@@ -1,8 +1,13 @@
-import { EntityComponentTypes, ItemLockMode, ItemStack, ItemTypes, Player, system, world } from '@minecraft/server'
+import { EntityComponentTypes, ItemLockMode, ItemStack, ItemTypes, Player, system, TitleDisplayOptions, world } from '@minecraft/server'
 import { menu_inicialize } from 'menu'
 import { player_attribute_t } from 'types'
 
 export const MAX_LEVEL = 220
+const title_display_options: TitleDisplayOptions = {
+  fadeInDuration: 0,
+  fadeOutDuration: 0,
+  stayDuration: 0
+}
 
 export function player_inicialize(player: Player) {
   let max_health = player_max_hp_get(player)
@@ -15,13 +20,13 @@ export function player_inicialize(player: Player) {
     player_agility_set(player, 1)
   }
   player_hp_set(player, max_health)
-  health_bar_update(player)
   menu_inicialize(player)
 }
 // hud
 function health_bar_update(player: Player) {
   const hp = player_hp_get(player)
   const max_hp = player_max_hp_get(player)
+  world.sendMessage(`health_bar_label:${Math.floor(hp)}/${max_hp}`)
   player.onScreenDisplay.setTitle(`health_bar:${Math.floor(hp / max_hp * 100)}`, {
     fadeInDuration: 0,
     fadeOutDuration: 0,
