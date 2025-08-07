@@ -1,5 +1,5 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
       "identifier": "sao:frenzy_boar",
@@ -8,46 +8,41 @@
       },
       "textures": {
         "default": "textures/entity/frenzy_boar",
-        "sao_health_bar": "textures/ui/health_bar"
+        "sao_health_bar": "textures/ui/health_bar",
+        "sao_cursor": "textures/ui/cursor_red"
       },
       "geometry": {
         "default": "geometry.hoglin",
-        "sao_health_bar": "geometry.sao_health_bar"
+        "sao_health_bar": "geometry.sao_health_bar",
+        "sao_cursor": "geometry.sao_cursor"
       },
       "spawn_egg": {
         "texture": "spawn_egg_frenzy_boar"
       },
       "scripts": {
         "pre_animation": [
-          "variable.tcos_right_side = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / variable.gliding_speed_value) * 57.3;",
-          "variable.tcos_left_side = -variable.tcos_right_side;",
-          "variable.attack_head_rot =  Math.sin(variable.attack_time * 180.0) * -37.3;",
-          "variable.health=math.round(q.health/q.max_health*100);"
+          "v.tcos_right_side = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / v.gliding_speed_value) * 57.3;",
+          "v.tcos_left_side = -v.tcos_right_side;",
+          "v.attack_head_rot =  Math.sin(v.attack_time * 180.0) * -37.3;",
+          "v.sao_health=q.is_alive&&q.property('sao:health_bar')&&q.distance_from_camera<=10 ? q.health/q.max_health : 0;"
+        ],
+        "animate": [
+          "look_at_target",
+          "walk",
+          "attack",
+          "sao_cursor_rotate"
         ]
       },
       "animations": {
-        "walk": "animation.sao_frenzy_boar.walk",
-        "look_at_target": "animation.sao_frenzy_boar.look_at_target",
-        "attack": "animation.sao_frenzy_boar.attack",
-        "hoglin_baby_scaling": "animation.sao_frenzy_boar.baby_scaling"
+        "walk": "animation.hoglin.walk",
+        "look_at_target": "animation.hoglin.look_at_target",
+        "attack": "animation.hoglin.attack",
+        "sao_cursor_rotate": "animation.sao_cursor.rotate"
       },
-      "animation_controllers": [
-        {
-          "look_at_target": "controller.animation.hoglin.look_at_target"
-        },
-        {
-          "walk": "controller.animation.hoglin.walk"
-        },
-        {
-          "attack": "controller.animation.hoglin.attack"
-        },
-        {
-          "hoglin_baby_scaling": "controller.animation.hoglin.baby_scaling"
-        }
-      ],
       "render_controllers": [
         "controller.render.hoglin",
-        "controller.render.sao_health_bar"
+        "controller.render.sao_health_bar",
+        "controller.render.sao_cursor"
       ]
     }
   }

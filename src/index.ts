@@ -1,9 +1,10 @@
-import { CommandPermissionLevel, CustomCommandStatus, EntityComponentTypes, Player, system, world } from '@minecraft/server'
+import { CommandPermissionLevel, CustomCommandParamType, CustomCommandStatus, EntityComponentTypes, Player, system, world } from '@minecraft/server'
 import { MinecraftEntityTypes } from 'vanilla-data/index'
 import { menu_display, menu_inicialize } from 'menu'
-import { player_health_bar_update, player_hp_get, player_inicialize, player_max_hp_get } from 'player'
+import { player_hp_get, player_hp_set, player_inicialize, player_max_hp_get, player_xp_gain } from 'player'
 import { item_t } from 'types'
 import { random_range } from 'utils/math'
+import { tooltip_damage_indicator, tooltip_display_name } from 'tooltip'
 
 system.beforeEvents.startup.subscribe(event => {
   const { customCommandRegistry } = event
@@ -44,11 +45,27 @@ system.beforeEvents.startup.subscribe(event => {
       message: `Health ${player_max_hp_get(player)}`
     }
   })
+  customCommandRegistry.registerCommand({
+    name: 'sao:xp_gain',
+    description: 'SAO XP Gain',
+    permissionLevel: CommandPermissionLevel.Admin,
+    cheatsRequired: true,
+    mandatoryParameters: [
+      { name: 'quantity', type: CustomCommandParamType.Integer }
+    ]
+  }, (event, quantity) => {
+    const player = <Player>event.sourceEntity
+    world.sendMessage(`quantity ${quantity} ${typeof quantity}`)
+    tooltip_display_name(player, `§l§fExp ${quantity}\n`)
+    player_xp_gain(player, quantity)
+    return {
+      status: CustomCommandStatus.Success
+    }
+  })
 })
 world.afterEvents.playerSpawn.subscribe(event => {
   const { player } = event
   player_inicialize(player)
-  menu_inicialize(player)
 })
 world.beforeEvents.itemUse.subscribe(event => {
   const { itemStack, source } = event
@@ -60,26 +77,36 @@ world.beforeEvents.itemUse.subscribe(event => {
 })
 world.afterEvents.entityHealthChanged.subscribe(event => {
   const { entity, newValue, oldValue } = event
+  // player_health_cap
   if (entity.typeId === MinecraftEntityTypes.Player) {
     const player = <Player>entity
     const max_hp = player_max_hp_get(player)
     if (newValue > max_hp) {
-      const health = player.getComponent(EntityComponentTypes.Health)
-      health.setCurrentValue(max_hp)
+      return player_hp_set(player, max_hp)
     }
-    player_health_bar_update(player)
   }
-  // damage_indicator
-  const damage = Math.floor(newValue - oldValue)
-  const color = damage < 0 ? '§e' : '§a'
-  const signal = damage < 0 ? '' : '+'
-  const mob_health = entity.getComponent('minecraft:health')
-  // entity.name
-  const damage_indicator = entity.dimension.spawnEntity(<any>'sao:damage_indicator', entity.location)
-  damage_indicator.nameTag = `§l${color}${signal}${damage}`
-  damage_indicator.applyImpulse({
-    x: random_range(0, 0.01),
-    y: 0.05,
-    z: random_range(0, 0.01)
+  tooltip_damage_indicator(entity, Math.floor(newValue - oldValue))
+})
+
+world.beforeEvents.playerInteractWithEntity.subscribe(event => {
+  system.run(() => {
+    // display_name
+    const { target } = event
+    tooltip_display_name(target, `§l§f${target.typeId}`)
   })
+})
+world.afterEvents.entityDie.subscribe(event => {
+  const { damageSource, deadEntity } = event
+  if (damageSource.damagingEntity?.typeId === MinecraftEntityTypes.Player) {
+    const experience = <number>deadEntity.getProperty('sao:exp')
+    if (experience) {
+      const player = <Player>damageSource.damagingEntity
+      tooltip_display_name(
+        deadEntity,
+        `§l§fExp ${experience}\n`
+        + `§l§fCol test`
+      )
+      player_xp_gain(player, experience)
+    }
+  }
 })

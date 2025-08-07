@@ -5,7 +5,22 @@
       "identifier": "sao:frenzy_boar",
       "spawn_category": "creature",
       "is_spawnable": true,
-      "is_summonable": true
+      "is_summonable": true,
+      "properties": {
+        "sao:health_bar": {
+          "type": "bool",
+          "client_sync": true,
+          "default": "q.had_component_group('sao:health_bar_timer')"
+        },
+        "sao:exp": {
+          "type": "int",
+          "range": [
+            4,
+            24
+          ],
+          "default": 4
+        }
+      }
     },
     "component_groups": {
       "sao:level_1": {
@@ -50,6 +65,15 @@
         },
         "minecraft:attack": {
           "damage": 19
+        }
+      },
+      "sao:health_bar_timer": {
+        "minecraft:timer": {
+          "time": 5,
+          "looping": false,
+          "time_down_event": {
+            "event": "sao:health_bar_hide"
+          }
         }
       }
     },
@@ -159,30 +183,61 @@
         "is_pushable": true,
         "is_pushable_by_piston": true
       },
-      "minecraft:conditional_bandwidth_optimization": {}
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "event": "sao:health_bar_show"
+            }
+          }
+        ]
+      }
     },
     "events": {
+      "sao:health_bar_show": {
+        "set_property": {
+          "sao:health_bar": true
+        },
+        "add": {
+          "component_groups": [
+            "sao:health_bar_timer"
+          ]
+        }
+      },
+      "sao:health_bar_hide": {
+        "set_property": {
+          "sao:health_bar": false
+        },
+        "remove": {
+          "component_groups": [
+            "sao:health_bar_timer"
+          ]
+        }
+      },
       "minecraft:entity_spawned": {
-        "sequence": [
+        "randomize": [
           {
-            "randomize": [
-              {
-                "weight": 70,
-                "add": {
-                  "component_groups": [
-                    "sao:level_1"
-                  ]
-                }
-              },
-              {
-                "weight": 30,
-                "add": {
-                  "component_groups": [
-                    "sao:level_7"
-                  ]
-                }
-              }
-            ]
+            "weight": 90,
+            "set_property": {
+              "sao:exp": "Math.Random(4,7)"
+            },
+            "add": {
+              "component_groups": [
+                "sao:level_1"
+              ]
+            }
+          },
+          {
+            "weight": 10,
+            "set_property": {
+              "sao:exp": "Math.Random(23,24)"
+            },
+            "add": {
+              "component_groups": [
+                "sao:level_7"
+              ]
+            }
           }
         ]
       }

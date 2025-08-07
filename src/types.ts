@@ -29,6 +29,10 @@
  * +20 AGI
  */
 
+export interface player_property_t {
+  'sao:level': number
+}
+
 /**
  * 3 attributes per level
  * 
@@ -43,6 +47,10 @@ export interface player_stat_t {
    * This determines your speed when running.
    */
   agility: number
+}
+export enum player_attribute_t {
+  strength,
+  agility
 }
 /**
  * Skill levels are independent of player levels. A skill's level is increased

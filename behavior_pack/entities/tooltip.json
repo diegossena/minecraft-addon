@@ -2,9 +2,35 @@
   "format_version": "1.21.90",
   "minecraft:entity": {
     "description": {
-      "identifier": "sao:damage_indicator",
+      "identifier": "sao:tooltip",
       "is_spawnable": false,
       "is_summonable": true
+    },
+    "component_groups": {
+      "sao:damage_indicator": {
+        "minecraft:despawn": {
+          "filters": {
+            "any_of": [
+              {
+                "test": "inactivity_timer",
+                "value": 1
+              }
+            ]
+          }
+        }
+      },
+      "sao:display_name": {
+        "minecraft:despawn": {
+          "filters": {
+            "any_of": [
+              {
+                "test": "inactivity_timer",
+                "value": 2
+              }
+            ]
+          }
+        }
+      }
     },
     "components": {
       "minecraft:type_family": {
@@ -42,10 +68,6 @@
               "test": "distance_to_nearest_player",
               "operator": ">",
               "value": 8
-            },
-            {
-              "test": "inactivity_timer",
-              "value": 1
             }
           ]
         }
@@ -58,6 +80,22 @@
         }
       },
       "minecraft:fire_immune": {}
+    },
+    "events": {
+      "sao:damage_indicator": {
+        "add": {
+          "component_groups": [
+            "sao:damage_indicator"
+          ]
+        }
+      },
+      "sao:display_name": {
+        "add": {
+          "component_groups": [
+            "sao:display_name"
+          ]
+        }
+      }
     }
   }
 }

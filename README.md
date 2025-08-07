@@ -48,3 +48,12 @@ development_resource_packs
 - ![#ff00ff](https://placehold.co/15x15/magenta/magenta.png) §d Magenta
 - ![#ffd700](https://placehold.co/15x15/gold/gold.png) §e Light Yellow
 - ![#fff](https://placehold.co/15x15/white/white.png) §f White
+
+
+## Ideias
+
+- Mostrar a barra de HP do mob apenas enquanto ele estiver tomando dano - OK
+- Colocar o cursor que é um cristal na cabeça do mob - OK
+- Fazer animação de morte
+- Criar andares
+- Alterar cor da barra de vida (amarelo <= 50%) (vermelho <= 30%)
