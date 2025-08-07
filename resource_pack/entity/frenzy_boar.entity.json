@@ -24,7 +24,12 @@
           "v.tcos_right_side = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / v.gliding_speed_value) * 57.3;",
           "v.tcos_left_side = -v.tcos_right_side;",
           "v.attack_head_rot =  Math.sin(v.attack_time * 180.0) * -37.3;",
-          "v.looking_at_entity = Math.abs(Math.abs(q.rotation_to_camera(1) - q.camera_rotation(1)) - 180) < (80 / q.distance_from_camera) && Math.abs(-Math.atan2(-q.distance_from_camera * Math.sin(q.rotation_to_camera(0)) - 1, q.distance_from_camera * Math.cos(q.rotation_to_camera(0))) + q.camera_rotation(0)) < (60 / q.distance_from_camera);",
+          // is_looking_at
+          "v.looking_at_center_offset = .5;", // (+ is upward, - is downward)
+          "v.looking_at_horizontal_angle = 80;",
+          "v.looking_at_vertical_angle = 80;",
+          "v.looking_at_entity = Math.abs(Math.abs(q.rotation_to_camera(1) - q.camera_rotation(1)) - 180) < (v.looking_at_horizontal_angle / q.distance_from_camera) && Math.abs(-Math.atan2(-q.distance_from_camera * Math.sin(q.rotation_to_camera(0)) - v.looking_at_center_offset, q.distance_from_camera * Math.cos(q.rotation_to_camera(0))) + q.camera_rotation(0)) < (v.looking_at_vertical_angle / q.distance_from_camera);",
+          // show_health_bar
           "v.sao_health=q.is_alive&&(q.property('sao:health_bar') || v.looking_at_entity)&&q.distance_from_camera<=10 ? q.health/q.max_health : 0;"
         ],
         "animate": [
