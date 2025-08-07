@@ -98,15 +98,21 @@ world.beforeEvents.playerInteractWithEntity.subscribe(event => {
 world.afterEvents.entityDie.subscribe(event => {
   const { damageSource, deadEntity } = event
   if (damageSource.damagingEntity?.typeId === MinecraftEntityTypes.Player) {
-    const experience = <number>deadEntity.getProperty('sao:exp')
-    if (experience) {
+    const experience = <number>deadEntity.getProperty('sao:exp') || 0
+    const col = <number>deadEntity.getProperty('sao:col') || 0
+    tooltip_display_name(
+      deadEntity,
+      `§l§fResult\n`
+      + `§l§fExp ${experience}\n`
+      + `§l§fCol ${col}`
+    )
+    if (experience > 0) {
       const player = <Player>damageSource.damagingEntity
-      tooltip_display_name(
-        deadEntity,
-        `§l§fExp ${experience}\n`
-        + `§l§fCol test`
-      )
       player_xp_gain(player, experience)
+    }
+    if (col > 0) {
+      const player = <Player>damageSource.damagingEntity
+      // player_col_gain(player, col)
     }
   }
 })

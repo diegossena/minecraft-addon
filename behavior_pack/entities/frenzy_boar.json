@@ -19,12 +19,19 @@
             24
           ],
           "default": 4
+        },
+        "sao:col": {
+          "type": "int",
+          "range": [
+            0,
+            30
+          ],
+          "default": 30
         }
       }
     },
     "component_groups": {
       "sao:level_1": {
-        // "sao:col": 30,
         "minecraft:health": {
           "value": 130,
           "max": 130
@@ -53,7 +60,6 @@
           "value": 300,
           "max": 300
         },
-        // "sao:col": 30,
         "minecraft:experience_reward": {
           "on_death": "query.last_hit_by_player ? Math.Random(24,23) : 0"
         },
