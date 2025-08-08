@@ -1,30 +1,32 @@
-import { EntityComponentTypes, ItemLockMode, ItemStack, ItemTypes, Player, system, TitleDisplayOptions, world } from '@minecraft/server'
-import { menu_inicialize } from 'menu'
+import { EntityComponentTypes, Player, system, world } from '@minecraft/server'
 import { player_attribute_t } from 'types'
 
 export const MAX_LEVEL = 220
+export const STAMINA_MODIFIER = 3.5
+export const STAMINA_REGEN_RATE = 1
+export const STRENGHT_MODIFIER = 2.5
 
-export function player_inicialize(player: Player) {
-  let max_health = player_max_hp_get(player)
-  if (!max_health) {
-    player_level_set(player, 1)
-    player_xp_set(player, 0)
-    max_health = player_hp_from_level(1)
-    player_max_hp_set(player, max_health)
-    player_strenght_set(player, 1)
-    player_agility_set(player, 1)
-  }
-  player_hp_set(player, max_health)
-  menu_inicialize(player)
+export function player_reset(player: Player) {
+  player_level_set(player, 1)
+  player_xp_set(player, 0)
+  player_stamina_set(player, STAMINA_MODIFIER)
+  player_attribute_points_set(player, 0)
+  player_strenght_set(player, 1)
+  player_agility_set(player, 1)
+  player_hp_set(player, player_hp_from_level(1))
 }
 // hud
-function hud_update(player: Player) {
+export function player_hud_update(player: Player) {
   const hp = player_hp_get(player)
-  const max_hp = player_max_hp_get(player)
   const level = player_level_get(player)
+  const max_hp = player_hp_from_level(level)
+  const stamina = player_stamina_get(player)
+  const max_stamina = player_max_stamina_get(player)
+  const health_bar = `health_bar:${Math.floor(hp / max_hp * 100)}`
+  const stamina_bar = `stamina_bar:${Math.floor(stamina / max_stamina * 100)}`
   const hp_label = `${Math.floor(hp)}/${max_hp}`.padStart(13, ' ')
   const level_label = level.toString().padStart(3, ' ')
-  player.onScreenDisplay.setTitle(`health_bar:${Math.floor(hp / max_hp * 100)}`, {
+  player.onScreenDisplay.setTitle(health_bar + stamina_bar, {
     fadeInDuration: 0,
     fadeOutDuration: 0,
     stayDuration: 0,
@@ -33,10 +35,10 @@ function hud_update(player: Player) {
 }
 // level
 export function player_level_get(player: Player) {
-  return <number>player.getDynamicProperty('sao:level')
+  return <number>player.getProperty('sao:level')
 }
 function player_level_set(player: Player, level: number) {
-  player.setDynamicProperty('sao:level', level)
+  player.setProperty('sao:level', level)
 }
 // xp
 export function player_xp_get(player: Player) {
@@ -60,19 +62,17 @@ export function player_xp_gain(player: Player, value: number) {
       break
     }
   }
-  if (attribute_points > 0) {
-    player_attribute_points_set(player, player_attribute_points_get(player) + attribute_points)
-    player_level_set(player, level)
-  }
-  player_xp_set(player, xp)
+  system.run(() => {
+    if (attribute_points > 0) {
+      player_attribute_points_set(player, player_attribute_points_get(player) + attribute_points)
+      player_level_set(player, level)
+    }
+    player_xp_set(player, xp)
+  })
 }
 // attribute_points
 export function player_attribute_points_get(player: Player) {
-  const value = <number>player.getDynamicProperty('sao:attribute_points')
-  if (value === undefined) {
-    player_attribute_points_set(player, 0)
-  }
-  return value
+  return <number>player.getDynamicProperty('sao:attribute_points')
 }
 function player_attribute_points_set(player: Player, value: number) {
   player.setDynamicProperty('sao:attribute_points', value)
@@ -100,41 +100,35 @@ export function player_hp_get(player: Player) {
 export function player_hp_set(player: Player, value: number) {
   const health = player.getComponent(EntityComponentTypes.Health)
   health.setCurrentValue(value)
-  hud_update(player)
+  player_hud_update(player)
 }
 // max_hp
 export function player_max_hp_get(player: Player) {
-  return <number>player.getDynamicProperty('sao:max_hp')
-}
-export function player_max_hp_set(player: Player, hp: number) {
-  player.setDynamicProperty('sao:max_hp', hp)
-  hud_update(player)
+  const level = player_level_get(player)
+  return player_hp_from_level(level)
 }
 // stamina
 export function player_stamina_get(player: Player) {
-  const value = <number>player.getDynamicProperty('sao:stamina')
-  if (value === undefined) {
-    player_stamina_set(player, 100)
-    return 100
-  }
-  return value
+  return <number>player.getDynamicProperty('sao:stamina')
 }
-export function player_stamina_set(player: Player, hp: number) {
-  player.setDynamicProperty('sao:stamina', hp)
-  hud_update(player)
+export function player_max_stamina_get(player: Player) {
+  const agility = player_agility_get(player)
+  return agility * STAMINA_MODIFIER
+}
+export function player_stamina_set(player: Player, value: number) {
+  player.setDynamicProperty('sao:stamina', value)
+  player_hud_update(player)
 }
 // strenght
 export function player_strenght_get(player: Player) {
-  const value = <number>player.getDynamicProperty('sao:strenght')
-  return value
+  return <number>player.getDynamicProperty('sao:strenght')
 }
 function player_strenght_set(player: Player, value: number) {
   player.setDynamicProperty('sao:strenght', value)
 }
 // agility
 export function player_agility_get(player: Player) {
-  const value = <number>player.getDynamicProperty('sao:agility')
-  return value
+  return <number>player.getDynamicProperty('sao:agility')
 }
 function player_agility_set(player: Player, value: number) {
   player.setDynamicProperty('sao:agility', value)

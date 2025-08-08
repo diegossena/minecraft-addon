@@ -26,7 +26,7 @@
           "v.attack_head_rot =  Math.sin(v.attack_time * 180.0) * -37.3;",
           // is_looking_at
           "v.looking_at_center_offset = .5;", // (+ is upward, - is downward)
-          "v.looking_at_horizontal_angle = 80;",
+          "v.looking_at_horizontal_angle = 120;",
           "v.looking_at_vertical_angle = 80;",
           "v.looking_at_entity = Math.abs(Math.abs(q.rotation_to_camera(1) - q.camera_rotation(1)) - 180) < (v.looking_at_horizontal_angle / q.distance_from_camera) && Math.abs(-Math.atan2(-q.distance_from_camera * Math.sin(q.rotation_to_camera(0)) - v.looking_at_center_offset, q.distance_from_camera * Math.cos(q.rotation_to_camera(0))) + q.camera_rotation(0)) < (v.looking_at_vertical_angle / q.distance_from_camera);",
           // show_health_bar

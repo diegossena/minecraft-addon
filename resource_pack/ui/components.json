@@ -7,10 +7,6 @@
     ]
   },
   "action_form@server_form.long_form": {
-    // "size": [
-    //   275,
-    //   175
-    // ],
     "size": [
       160,
       200
@@ -28,17 +24,8 @@
   },
   "bar": {
     "type": "panel",
-    "$bar_texture|default": "textures/empty",
-    "$bar_offset|default": [
-      0,
-      0
-    ],
-    "$bar_size|default": [
-      "100%",
-      "100%"
-    ],
-    "$bar_anchor_from|default": "center",
-    "$bar_anchor_to|default": "center",
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
     "$bar_uv|default": [
       0,
       0
@@ -47,8 +34,6 @@
       "100%",
       "100%"
     ],
-    "$bar_layer|default": 0,
-    "$bar_clip_direction|default": "left",
     "controls": [
       {
         "$prefix@sao_components.title_data_control": {}
@@ -56,623 +41,618 @@
       {
         "0@sao_components.bar_image": {
           "$condition": "($prefix + '0')",
-          "$bar_clip_ratio": 1
+          "$clip_ratio": 1
         }
       },
       {
         "1@sao_components.bar_image": {
           "$condition": "($prefix + '1')",
-          "$bar_clip_ratio": 0.99
+          "$clip_ratio": 0.99
         }
       },
       {
         "2@sao_components.bar_image": {
           "$condition": "($prefix + '2')",
-          "$bar_clip_ratio": 0.98
+          "$clip_ratio": 0.98
         }
       },
       {
         "3@sao_components.bar_image": {
           "$condition": "($prefix + '3')",
-          "$bar_clip_ratio": 0.97
+          "$clip_ratio": 0.97
         }
       },
       {
         "4@sao_components.bar_image": {
           "$condition": "($prefix + '4')",
-          "$bar_clip_ratio": 0.96
+          "$clip_ratio": 0.96
         }
       },
       {
         "5@sao_components.bar_image": {
           "$condition": "($prefix + '5')",
-          "$bar_clip_ratio": 0.95
+          "$clip_ratio": 0.95
         }
       },
       {
         "6@sao_components.bar_image": {
           "$condition": "($prefix + '6')",
-          "$bar_clip_ratio": 0.94
+          "$clip_ratio": 0.94
         }
       },
       {
         "7@sao_components.bar_image": {
           "$condition": "($prefix + '7')",
-          "$bar_clip_ratio": 0.93
+          "$clip_ratio": 0.93
         }
       },
       {
         "8@sao_components.bar_image": {
           "$condition": "($prefix + '8')",
-          "$bar_clip_ratio": 0.92
+          "$clip_ratio": 0.92
         }
       },
       {
         "9@sao_components.bar_image": {
           "$condition": "($prefix + '9')",
-          "$bar_clip_ratio": 0.91
+          "$clip_ratio": 0.91
         }
       },
       {
         "10@sao_components.bar_image": {
           "$condition": "($prefix + '10')",
-          "$bar_clip_ratio": 0.9
+          "$clip_ratio": 0.9
         }
       },
       {
         "11@sao_components.bar_image": {
           "$condition": "($prefix + '11')",
-          "$bar_clip_ratio": 0.89
+          "$clip_ratio": 0.89
         }
       },
       {
         "12@sao_components.bar_image": {
           "$condition": "($prefix + '12')",
-          "$bar_clip_ratio": 0.88
+          "$clip_ratio": 0.88
         }
       },
       {
         "13@sao_components.bar_image": {
           "$condition": "($prefix + '13')",
-          "$bar_clip_ratio": 0.87
+          "$clip_ratio": 0.87
         }
       },
       {
         "14@sao_components.bar_image": {
           "$condition": "($prefix + '14')",
-          "$bar_clip_ratio": 0.86
+          "$clip_ratio": 0.86
         }
       },
       {
         "15@sao_components.bar_image": {
           "$condition": "($prefix + '15')",
-          "$bar_clip_ratio": 0.85
+          "$clip_ratio": 0.85
         }
       },
       {
         "16@sao_components.bar_image": {
           "$condition": "($prefix + '16')",
-          "$bar_clip_ratio": 0.84
+          "$clip_ratio": 0.84
         }
       },
       {
         "17@sao_components.bar_image": {
           "$condition": "($prefix + '17')",
-          "$bar_clip_ratio": 0.83
+          "$clip_ratio": 0.83
         }
       },
       {
         "18@sao_components.bar_image": {
           "$condition": "($prefix + '18')",
-          "$bar_clip_ratio": 0.82
+          "$clip_ratio": 0.82
         }
       },
       {
         "19@sao_components.bar_image": {
           "$condition": "($prefix + '19')",
-          "$bar_clip_ratio": 0.81
+          "$clip_ratio": 0.81
         }
       },
       {
         "20@sao_components.bar_image": {
           "$condition": "($prefix + '20')",
-          "$bar_clip_ratio": 0.8
+          "$clip_ratio": 0.8
         }
       },
       {
         "21@sao_components.bar_image": {
           "$condition": "($prefix + '21')",
-          "$bar_clip_ratio": 0.79
+          "$clip_ratio": 0.79
         }
       },
       {
         "22@sao_components.bar_image": {
           "$condition": "($prefix + '22')",
-          "$bar_clip_ratio": 0.78
+          "$clip_ratio": 0.78
         }
       },
       {
         "23@sao_components.bar_image": {
           "$condition": "($prefix + '23')",
-          "$bar_clip_ratio": 0.77
+          "$clip_ratio": 0.77
         }
       },
       {
         "24@sao_components.bar_image": {
           "$condition": "($prefix + '24')",
-          "$bar_clip_ratio": 0.76
+          "$clip_ratio": 0.76
         }
       },
       {
         "25@sao_components.bar_image": {
           "$condition": "($prefix + '25')",
-          "$bar_clip_ratio": 0.75
+          "$clip_ratio": 0.75
         }
       },
       {
         "26@sao_components.bar_image": {
           "$condition": "($prefix + '26')",
-          "$bar_clip_ratio": 0.74
+          "$clip_ratio": 0.74
         }
       },
       {
         "27@sao_components.bar_image": {
           "$condition": "($prefix + '27')",
-          "$bar_clip_ratio": 0.73
+          "$clip_ratio": 0.73
         }
       },
       {
         "28@sao_components.bar_image": {
           "$condition": "($prefix + '28')",
-          "$bar_clip_ratio": 0.72
+          "$clip_ratio": 0.72
         }
       },
       {
         "29@sao_components.bar_image": {
           "$condition": "($prefix + '29')",
-          "$bar_clip_ratio": 0.71
+          "$clip_ratio": 0.71
         }
       },
       {
         "30@sao_components.bar_image": {
           "$condition": "($prefix + '30')",
-          "$bar_clip_ratio": 0.7
+          "$clip_ratio": 0.7
         }
       },
       {
         "31@sao_components.bar_image": {
           "$condition": "($prefix + '31')",
-          "$bar_clip_ratio": 0.69
+          "$clip_ratio": 0.69
         }
       },
       {
         "32@sao_components.bar_image": {
           "$condition": "($prefix + '32')",
-          "$bar_clip_ratio": 0.68
+          "$clip_ratio": 0.68
         }
       },
       {
         "33@sao_components.bar_image": {
           "$condition": "($prefix + '33')",
-          "$bar_clip_ratio": 0.67
+          "$clip_ratio": 0.67
         }
       },
       {
         "34@sao_components.bar_image": {
           "$condition": "($prefix + '34')",
-          "$bar_clip_ratio": 0.66
+          "$clip_ratio": 0.66
         }
       },
       {
         "35@sao_components.bar_image": {
           "$condition": "($prefix + '35')",
-          "$bar_clip_ratio": 0.65
+          "$clip_ratio": 0.65
         }
       },
       {
         "36@sao_components.bar_image": {
           "$condition": "($prefix + '36')",
-          "$bar_clip_ratio": 0.64
+          "$clip_ratio": 0.64
         }
       },
       {
         "37@sao_components.bar_image": {
           "$condition": "($prefix + '37')",
-          "$bar_clip_ratio": 0.63
+          "$clip_ratio": 0.63
         }
       },
       {
         "38@sao_components.bar_image": {
           "$condition": "($prefix + '38')",
-          "$bar_clip_ratio": 0.62
+          "$clip_ratio": 0.62
         }
       },
       {
         "39@sao_components.bar_image": {
           "$condition": "($prefix + '39')",
-          "$bar_clip_ratio": 0.61
+          "$clip_ratio": 0.61
         }
       },
       {
         "40@sao_components.bar_image": {
           "$condition": "($prefix + '40')",
-          "$bar_clip_ratio": 0.6
+          "$clip_ratio": 0.6
         }
       },
       {
         "41@sao_components.bar_image": {
           "$condition": "($prefix + '41')",
-          "$bar_clip_ratio": 0.59
+          "$clip_ratio": 0.59
         }
       },
       {
         "42@sao_components.bar_image": {
           "$condition": "($prefix + '42')",
-          "$bar_clip_ratio": 0.58
+          "$clip_ratio": 0.58
         }
       },
       {
         "43@sao_components.bar_image": {
           "$condition": "($prefix + '43')",
-          "$bar_clip_ratio": 0.57
+          "$clip_ratio": 0.57
         }
       },
       {
         "44@sao_components.bar_image": {
           "$condition": "($prefix + '44')",
-          "$bar_clip_ratio": 0.56
+          "$clip_ratio": 0.56
         }
       },
       {
         "45@sao_components.bar_image": {
           "$condition": "($prefix + '45')",
-          "$bar_clip_ratio": 0.55
+          "$clip_ratio": 0.55
         }
       },
       {
         "46@sao_components.bar_image": {
           "$condition": "($prefix + '46')",
-          "$bar_clip_ratio": 0.54
+          "$clip_ratio": 0.54
         }
       },
       {
         "47@sao_components.bar_image": {
           "$condition": "($prefix + '47')",
-          "$bar_clip_ratio": 0.53
+          "$clip_ratio": 0.53
         }
       },
       {
         "48@sao_components.bar_image": {
           "$condition": "($prefix + '48')",
-          "$bar_clip_ratio": 0.52
+          "$clip_ratio": 0.52
         }
       },
       {
         "49@sao_components.bar_image": {
           "$condition": "($prefix + '49')",
-          "$bar_clip_ratio": 0.51
+          "$clip_ratio": 0.51
         }
       },
       {
         "50@sao_components.bar_image": {
           "$condition": "($prefix + '50')",
-          "$bar_clip_ratio": 0.5
+          "$clip_ratio": 0.5
         }
       },
       {
         "51@sao_components.bar_image": {
           "$condition": "($prefix + '51')",
-          "$bar_clip_ratio": 0.49
+          "$clip_ratio": 0.49
         }
       },
       {
         "52@sao_components.bar_image": {
           "$condition": "($prefix + '52')",
-          "$bar_clip_ratio": 0.48
+          "$clip_ratio": 0.48
         }
       },
       {
         "53@sao_components.bar_image": {
           "$condition": "($prefix + '53')",
-          "$bar_clip_ratio": 0.47
+          "$clip_ratio": 0.47
         }
       },
       {
         "54@sao_components.bar_image": {
           "$condition": "($prefix + '54')",
-          "$bar_clip_ratio": 0.46
+          "$clip_ratio": 0.46
         }
       },
       {
         "55@sao_components.bar_image": {
           "$condition": "($prefix + '55')",
-          "$bar_clip_ratio": 0.45
+          "$clip_ratio": 0.45
         }
       },
       {
         "56@sao_components.bar_image": {
           "$condition": "($prefix + '56')",
-          "$bar_clip_ratio": 0.44
+          "$clip_ratio": 0.44
         }
       },
       {
         "57@sao_components.bar_image": {
           "$condition": "($prefix + '57')",
-          "$bar_clip_ratio": 0.43
+          "$clip_ratio": 0.43
         }
       },
       {
         "58@sao_components.bar_image": {
           "$condition": "($prefix + '58')",
-          "$bar_clip_ratio": 0.42
+          "$clip_ratio": 0.42
         }
       },
       {
         "59@sao_components.bar_image": {
           "$condition": "($prefix + '59')",
-          "$bar_clip_ratio": 0.41
+          "$clip_ratio": 0.41
         }
       },
       {
         "60@sao_components.bar_image": {
           "$condition": "($prefix + '60')",
-          "$bar_clip_ratio": 0.4
+          "$clip_ratio": 0.4
         }
       },
       {
         "61@sao_components.bar_image": {
           "$condition": "($prefix + '61')",
-          "$bar_clip_ratio": 0.39
+          "$clip_ratio": 0.39
         }
       },
       {
         "62@sao_components.bar_image": {
           "$condition": "($prefix + '62')",
-          "$bar_clip_ratio": 0.38
+          "$clip_ratio": 0.38
         }
       },
       {
         "63@sao_components.bar_image": {
           "$condition": "($prefix + '63')",
-          "$bar_clip_ratio": 0.37
+          "$clip_ratio": 0.37
         }
       },
       {
         "64@sao_components.bar_image": {
           "$condition": "($prefix + '64')",
-          "$bar_clip_ratio": 0.36
+          "$clip_ratio": 0.36
         }
       },
       {
         "65@sao_components.bar_image": {
           "$condition": "($prefix + '65')",
-          "$bar_clip_ratio": 0.35
+          "$clip_ratio": 0.35
         }
       },
       {
         "66@sao_components.bar_image": {
           "$condition": "($prefix + '66')",
-          "$bar_clip_ratio": 0.34
+          "$clip_ratio": 0.34
         }
       },
       {
         "67@sao_components.bar_image": {
           "$condition": "($prefix + '67')",
-          "$bar_clip_ratio": 0.33
+          "$clip_ratio": 0.33
         }
       },
       {
         "68@sao_components.bar_image": {
           "$condition": "($prefix + '68')",
-          "$bar_clip_ratio": 0.32
+          "$clip_ratio": 0.32
         }
       },
       {
         "69@sao_components.bar_image": {
           "$condition": "($prefix + '69')",
-          "$bar_clip_ratio": 0.31
+          "$clip_ratio": 0.31
         }
       },
       {
         "70@sao_components.bar_image": {
           "$condition": "($prefix + '70')",
-          "$bar_clip_ratio": 0.3
+          "$clip_ratio": 0.3
         }
       },
       {
         "71@sao_components.bar_image": {
           "$condition": "($prefix + '71')",
-          "$bar_clip_ratio": 0.29
+          "$clip_ratio": 0.29
         }
       },
       {
         "72@sao_components.bar_image": {
           "$condition": "($prefix + '72')",
-          "$bar_clip_ratio": 0.28
+          "$clip_ratio": 0.28
         }
       },
       {
         "73@sao_components.bar_image": {
           "$condition": "($prefix + '73')",
-          "$bar_clip_ratio": 0.27
+          "$clip_ratio": 0.27
         }
       },
       {
         "74@sao_components.bar_image": {
           "$condition": "($prefix + '74')",
-          "$bar_clip_ratio": 0.26
+          "$clip_ratio": 0.26
         }
       },
       {
         "75@sao_components.bar_image": {
           "$condition": "($prefix + '75')",
-          "$bar_clip_ratio": 0.25
+          "$clip_ratio": 0.25
         }
       },
       {
         "76@sao_components.bar_image": {
           "$condition": "($prefix + '76')",
-          "$bar_clip_ratio": 0.24
+          "$clip_ratio": 0.24
         }
       },
       {
         "77@sao_components.bar_image": {
           "$condition": "($prefix + '77')",
-          "$bar_clip_ratio": 0.23
+          "$clip_ratio": 0.23
         }
       },
       {
         "78@sao_components.bar_image": {
           "$condition": "($prefix + '78')",
-          "$bar_clip_ratio": 0.22
+          "$clip_ratio": 0.22
         }
       },
       {
         "79@sao_components.bar_image": {
           "$condition": "($prefix + '79')",
-          "$bar_clip_ratio": 0.21
+          "$clip_ratio": 0.21
         }
       },
       {
         "80@sao_components.bar_image": {
           "$condition": "($prefix + '80')",
-          "$bar_clip_ratio": 0.2
+          "$clip_ratio": 0.2
         }
       },
       {
         "81@sao_components.bar_image": {
           "$condition": "($prefix + '81')",
-          "$bar_clip_ratio": 0.19
+          "$clip_ratio": 0.19
         }
       },
       {
         "82@sao_components.bar_image": {
           "$condition": "($prefix + '82')",
-          "$bar_clip_ratio": 0.18
+          "$clip_ratio": 0.18
         }
       },
       {
         "83@sao_components.bar_image": {
           "$condition": "($prefix + '83')",
-          "$bar_clip_ratio": 0.17
+          "$clip_ratio": 0.17
         }
       },
       {
         "84@sao_components.bar_image": {
           "$condition": "($prefix + '84')",
-          "$bar_clip_ratio": 0.16
+          "$clip_ratio": 0.16
         }
       },
       {
         "85@sao_components.bar_image": {
           "$condition": "($prefix + '85')",
-          "$bar_clip_ratio": 0.15
+          "$clip_ratio": 0.15
         }
       },
       {
         "86@sao_components.bar_image": {
           "$condition": "($prefix + '86')",
-          "$bar_clip_ratio": 0.14
+          "$clip_ratio": 0.14
         }
       },
       {
         "87@sao_components.bar_image": {
           "$condition": "($prefix + '87')",
-          "$bar_clip_ratio": 0.13
+          "$clip_ratio": 0.13
         }
       },
       {
         "88@sao_components.bar_image": {
           "$condition": "($prefix + '88')",
-          "$bar_clip_ratio": 0.12
+          "$clip_ratio": 0.12
         }
       },
       {
         "89@sao_components.bar_image": {
           "$condition": "($prefix + '89')",
-          "$bar_clip_ratio": 0.11
+          "$clip_ratio": 0.11
         }
       },
       {
         "90@sao_components.bar_image": {
           "$condition": "($prefix + '90')",
-          "$bar_clip_ratio": 0.1
+          "$clip_ratio": 0.1
         }
       },
       {
         "91@sao_components.bar_image": {
           "$condition": "($prefix + '91')",
-          "$bar_clip_ratio": 0.09
+          "$clip_ratio": 0.09
         }
       },
       {
         "92@sao_components.bar_image": {
           "$condition": "($prefix + '92')",
-          "$bar_clip_ratio": 0.08
+          "$clip_ratio": 0.08
         }
       },
       {
         "93@sao_components.bar_image": {
           "$condition": "($prefix + '93')",
-          "$bar_clip_ratio": 0.07
+          "$clip_ratio": 0.07
         }
       },
       {
         "94@sao_components.bar_image": {
           "$condition": "($prefix + '94')",
-          "$bar_clip_ratio": 0.06
+          "$clip_ratio": 0.06
         }
       },
       {
         "95@sao_components.bar_image": {
           "$condition": "($prefix + '95')",
-          "$bar_clip_ratio": 0.05
+          "$clip_ratio": 0.05
         }
       },
       {
         "96@sao_components.bar_image": {
           "$condition": "($prefix + '96')",
-          "$bar_clip_ratio": 0.04
+          "$clip_ratio": 0.04
         }
       },
       {
         "97@sao_components.bar_image": {
           "$condition": "($prefix + '97')",
-          "$bar_clip_ratio": 0.03
+          "$clip_ratio": 0.03
         }
       },
       {
         "98@sao_components.bar_image": {
           "$condition": "($prefix + '98')",
-          "$bar_clip_ratio": 0.02
+          "$clip_ratio": 0.02
         }
       },
       {
         "99@sao_components.bar_image": {
           "$condition": "($prefix + '99')",
-          "$bar_clip_ratio": 0.01
+          "$clip_ratio": 0.01
         }
       },
       {
         "100@sao_components.bar_image": {
           "$condition": "($prefix + '100')",
-          "$bar_clip_ratio": 0.001
+          "$clip_ratio": 0.001
         }
       }
     ]
   },
   "bar_image": {
     "type": "image",
-    "texture": "$bar_texture",
-    "offset": "$bar_offset",
-    "size": "$bar_size",
-    "anchor_from": "$bar_anchor_from",
-    "anchor_to": "$bar_anchor_to",
+    "texture": "$texture",
+    "clip_ratio": "$clip_ratio",
+    "clip_direction": "left",
     "uv": "$bar_uv",
     "uv_size": "$bar_uv_size",
-    "layer": "$bar_layer",
-    "clip_ratio": "$bar_clip_ratio",
-    "clip_direction": "$bar_clip_direction",
     "bindings": [
       {
         "binding_type": "view",

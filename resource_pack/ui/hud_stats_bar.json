@@ -25,28 +25,35 @@
         }
       },
       {
-        "health_bar@sao_stats_bar.health_bar_panel": {}
-      }
-    ]
-  },
-  "health_bar_panel": {
-    "type": "panel",
-    "anchor_from": "top_left",
-    "anchor_to": "top_left",
-    "offset": [
-      40.64,
-      7.66
-    ],
-    "size": [
-      137.42,
-      8.01
-    ],
-    "layer": 1,
-    "controls": [
-      {
         "health_bar@sao_components.bar": {
           "$prefix": "health_bar:",
-          "$bar_texture": "textures/ui/health_bar"
+          "$texture": "textures/ui/health_bar",
+          "offset": [
+            40.64,
+            7.66
+          ],
+          "size": [
+            137.42,
+            8.01
+          ]
+        }
+      },
+      {
+        "stamina_bar@sao_components.bar": {
+          "$prefix": "stamina_bar:",
+          "$texture": "textures/ui/stamina_bar",
+          "$bar_uv_size": [
+            70,
+            "100%"
+          ],
+          "size": [
+            70,
+            3
+          ],
+          "offset": [
+            40.64,
+            18.5
+          ]
         }
       },
       {
@@ -60,7 +67,7 @@
           "shadow": true,
           "alpha": 0.8,
           "offset": [
-            63,
+            109,
             6
           ],
           "$prefix": "hud_label:",

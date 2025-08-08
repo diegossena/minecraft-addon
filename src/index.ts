@@ -1,9 +1,25 @@
-import { CommandPermissionLevel, CustomCommandParamType, CustomCommandStatus, EntityComponentTypes, Player, system, world } from '@minecraft/server'
+import { CommandPermissionLevel, CustomCommandParamType, CustomCommandStatus, EntityComponentTypes, EntityDamageCause, Player, system, world } from '@minecraft/server'
 import { MinecraftEntityTypes } from 'vanilla-data/index'
 import { menu_display, menu_inicialize } from 'menu'
-import { player_hp_get, player_hp_set, player_inicialize, player_max_hp_get, player_xp_gain } from 'player'
+import {
+  player_agility_get,
+  player_hp_from_level,
+  player_hp_get,
+  player_hp_set,
+  player_hud_update,
+  player_level_get,
+  player_max_hp_get,
+  player_max_stamina_get,
+  player_reset,
+  player_stamina_get,
+  player_stamina_set,
+  player_strenght_get,
+  player_xp_gain,
+  STAMINA_MODIFIER,
+  STAMINA_REGEN_RATE,
+  STRENGHT_MODIFIER
+} from 'player'
 import { item_t } from 'types'
-import { random_range } from 'utils/math'
 import { tooltip_damage_indicator, tooltip_display_name } from 'tooltip'
 import { clamp } from 'utils/number'
 
@@ -41,10 +57,36 @@ system.beforeEvents.startup.subscribe(event => {
     cheatsRequired: false,
   }, event => {
     const player = <Player>event.sourceEntity
+    const max_hp = player_max_hp_get(player)
     return {
       status: CustomCommandStatus.Success,
-      message: `Health ${player_max_hp_get(player)}`
+      message: `Health ${max_hp}`
     }
+  })
+  customCommandRegistry.registerCommand({
+    name: 'sao:stamina',
+    description: 'SAO Player Stamina',
+    permissionLevel: CommandPermissionLevel.Any,
+    cheatsRequired: false,
+  }, event => {
+    const player = <Player>event.sourceEntity
+    const stamina = player_stamina_get(player)
+    const max_stamina = player_max_stamina_get(player)
+    return {
+      status: CustomCommandStatus.Success,
+      message: `Stamina ${stamina}/${max_stamina}`
+    }
+  })
+  customCommandRegistry.registerCommand({
+    name: 'sao:reset',
+    description: 'SAO Player Reset',
+    permissionLevel: CommandPermissionLevel.Any,
+    cheatsRequired: false,
+  }, event => {
+    system.run(() => {
+      player_reset(<Player>event.sourceEntity)
+    })
+    return { status: CustomCommandStatus.Success }
   })
   customCommandRegistry.registerCommand({
     name: 'sao:xp_gain',
@@ -56,7 +98,6 @@ system.beforeEvents.startup.subscribe(event => {
     ]
   }, (event, quantity) => {
     const player = <Player>event.sourceEntity
-    world.sendMessage(`quantity ${quantity} ${typeof quantity}`)
     tooltip_display_name(player, `§l§fExp ${quantity}\n`)
     player_xp_gain(player, quantity)
     return {
@@ -65,8 +106,14 @@ system.beforeEvents.startup.subscribe(event => {
   })
 })
 world.afterEvents.playerSpawn.subscribe(event => {
-  const { player } = event
-  player_inicialize(player)
+  const { player, initialSpawn } = event
+  // player_inicialize
+  const level = player_level_get(player)
+  if (initialSpawn) {
+    player_reset(player)
+    menu_inicialize(player)
+  }
+  player_hp_set(player, player_hp_from_level(level))
 })
 world.beforeEvents.itemUse.subscribe(event => {
   const { itemStack, source } = event
@@ -76,15 +123,45 @@ world.beforeEvents.itemUse.subscribe(event => {
       break
   }
 })
-world.afterEvents.entityHealthChanged.subscribe(event => {
-  const { entity, newValue, oldValue } = event
-  // player_health_cap
-  if (entity.typeId === MinecraftEntityTypes.Player) {
-    const player = <Player>entity
-    const hp = clamp(newValue, 0, player_max_hp_get(player))
-    player_hp_set(player, hp)
+world.afterEvents.entityHurt.subscribe(event => {
+  const { damageSource, hurtEntity, damage } = event
+  let additional_damage = 0
+  if (
+    damageSource.damagingEntity?.typeId === MinecraftEntityTypes.Player
+    && damageSource.cause === EntityDamageCause.entityAttack
+  ) {
+    const player = <Player>damageSource.damagingEntity
+    additional_damage = player_strenght_get(player) * STRENGHT_MODIFIER
+    const stamina = player_stamina_get(player) - additional_damage
+    if (stamina >= 0) {
+      player_stamina_set(player, stamina)
+    } else {
+      additional_damage = 0
+    }
   }
-  tooltip_damage_indicator(entity, Math.floor(newValue - oldValue))
+  const target_health = hurtEntity.getComponent(EntityComponentTypes.Health)
+  const target_hp = Math.max(target_health.currentValue - additional_damage, 0)
+  target_health.setCurrentValue(target_hp)
+  if (hurtEntity.typeId === MinecraftEntityTypes.Player) {
+    player_hud_update(<Player>hurtEntity)
+  }
+  tooltip_damage_indicator(hurtEntity, -Math.floor(damage + additional_damage))
+})
+world.afterEvents.entityHealthChanged.subscribe(event => {
+  const { entity, oldValue } = event
+  let newValue = event.newValue
+  if (newValue > oldValue) {
+    if (entity.typeId === MinecraftEntityTypes.Player) {
+      // player_health_cap
+      const player = <Player>entity
+      newValue = Math.min(newValue, player_max_hp_get(player))
+      player_hp_set(player, newValue)
+    }
+    const result = Math.floor(newValue - oldValue)
+    if (result > 0) {
+      tooltip_damage_indicator(entity, Math.floor(newValue - oldValue))
+    }
+  }
 })
 
 world.beforeEvents.playerInteractWithEntity.subscribe(event => {
@@ -115,3 +192,29 @@ world.afterEvents.entityDie.subscribe(event => {
     }
   }
 })
+function main_tick() {
+  for (const player of world.getAllPlayers()) {
+    // exhaustion
+    const previous_exhaustion = <number>player.getDynamicProperty('sao:exhaustion') || 0
+    const exhaustion = player.getComponent(EntityComponentTypes.Exhaustion)
+    if (previous_exhaustion !== exhaustion.currentValue) {
+      player.setDynamicProperty('sao:exhaustion', exhaustion.currentValue)
+      const value = exhaustion.currentValue - previous_exhaustion
+      if (value > 0 && value < 1) {
+        player_stamina_set(player, player_stamina_get(player) - value)
+      }
+    }
+    // stamina_regen
+    if (system.currentTick % 80 === 0) {
+      const agility = player_agility_get(player)
+      const max_stamina = agility * STAMINA_MODIFIER
+      const stamina_regen = agility * STAMINA_REGEN_RATE
+      const player_stamina = player_stamina_get(player)
+      const stamina = Math.min(player_stamina + stamina_regen, max_stamina)
+      if (stamina != player_stamina) {
+        player_stamina_set(player, stamina)
+      }
+    }
+  }
+}
+system.runInterval(main_tick)

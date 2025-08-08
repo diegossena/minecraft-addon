@@ -84,6 +84,10 @@
       }
     },
     "components": {
+      "minecraft:collision_box": {
+        "width": 1.0,
+        "height": 1.5
+      },
       "minecraft:loot": {
         "table": "loot_tables/frenzy_boar.json"
       },
@@ -122,10 +126,6 @@
       "minecraft:movement.basic": {},
       "minecraft:jump.static": {},
       "minecraft:can_climb": {},
-      "minecraft:collision_box": {
-        "width": 0.9,
-        "height": 0.9
-      },
       "minecraft:balloonable": {
         "mass": 0.9
       },
@@ -224,7 +224,7 @@
       "minecraft:entity_spawned": {
         "randomize": [
           {
-            "weight": 90,
+            "weight": 70,
             "set_property": {
               "sao:exp": "Math.Random(4,7)"
             },
@@ -235,7 +235,7 @@
             }
           },
           {
-            "weight": 10,
+            "weight": 30,
             "set_property": {
               "sao:exp": "Math.Random(23,24)"
             },

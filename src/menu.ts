@@ -1,7 +1,8 @@
 import {
   ItemStack, ItemTypes, ItemLockMode,
   system,
-  Player
+  Player,
+  world
 } from '@minecraft/server'
 import { ActionFormData, ActionFormResponse } from '@minecraft/server-ui'
 import {
