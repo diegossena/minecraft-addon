@@ -1,4 +1,4 @@
-import { CommandPermissionLevel, CustomCommandParamType, CustomCommandStatus, EntityComponentTypes, EntityDamageCause, Player, system, world } from '@minecraft/server'
+import { CommandPermissionLevel, CustomCommandParamType, CustomCommandStatus, EntityComponentTypes, EntityDamageCause, EntityDieAfterEvent, EntityHealthChangedAfterEvent, EntityHurtAfterEvent, ItemUseBeforeEvent, Player, PlayerInteractWithEntityBeforeEvent, PlayerSpawnAfterEvent, StartupEvent, system, world } from '@minecraft/server'
 import { MinecraftEntityTypes } from 'vanilla-data/index'
 import { menu_display, menu_inicialize } from 'menu'
 import {
@@ -21,9 +21,34 @@ import {
 } from 'player'
 import { item_t } from 'types'
 import { tooltip_damage_indicator, tooltip_display_name } from 'tooltip'
-import { clamp } from 'utils/number'
 
-system.beforeEvents.startup.subscribe(event => {
+function main_tick() {
+  for (const player of world.getAllPlayers()) {
+    // exhaustion
+    const previous_exhaustion = <number>player.getDynamicProperty('sao:exhaustion') || 0
+    const exhaustion = player.getComponent(EntityComponentTypes.Exhaustion)
+    if (previous_exhaustion !== exhaustion.currentValue) {
+      player.setDynamicProperty('sao:exhaustion', exhaustion.currentValue)
+      const value = exhaustion.currentValue - previous_exhaustion
+      if (value > 0 && value < 1) {
+        player_stamina_set(player, player_stamina_get(player) - value)
+      }
+    }
+    // stamina_regen
+    if (system.currentTick % 80 === 0) {
+      const agility = player_agility_get(player)
+      const max_stamina = agility * STAMINA_MODIFIER
+      const stamina_regen = agility * STAMINA_REGEN_RATE
+      const player_stamina = player_stamina_get(player)
+      const stamina = Math.min(player_stamina + stamina_regen, max_stamina)
+      if (stamina != player_stamina) {
+        player_stamina_set(player, stamina)
+      }
+    }
+  }
+}
+
+function onstartup(event: StartupEvent) {
   const { customCommandRegistry } = event
   customCommandRegistry.registerCommand({
     name: 'sao:menu',
@@ -104,8 +129,9 @@ system.beforeEvents.startup.subscribe(event => {
       status: CustomCommandStatus.Success
     }
   })
-})
-world.afterEvents.playerSpawn.subscribe(event => {
+}
+
+function onplayerspawn(event: PlayerSpawnAfterEvent) {
   const { player, initialSpawn } = event
   // player_inicialize
   const level = player_level_get(player)
@@ -114,16 +140,16 @@ world.afterEvents.playerSpawn.subscribe(event => {
     menu_inicialize(player)
   }
   player_hp_set(player, player_hp_from_level(level))
-})
-world.beforeEvents.itemUse.subscribe(event => {
+}
+function onitemuse(event: ItemUseBeforeEvent) {
   const { itemStack, source } = event
   switch (itemStack.typeId) {
     case item_t.menu:
       menu_display(source)
       break
   }
-})
-world.afterEvents.entityHurt.subscribe(event => {
+}
+function onentityhurt(event: EntityHurtAfterEvent) {
   const { damageSource, hurtEntity, damage } = event
   let additional_damage = 0
   if (
@@ -146,8 +172,8 @@ world.afterEvents.entityHurt.subscribe(event => {
     player_hud_update(<Player>hurtEntity)
   }
   tooltip_damage_indicator(hurtEntity, -Math.floor(damage + additional_damage))
-})
-world.afterEvents.entityHealthChanged.subscribe(event => {
+}
+function onhealthchange(event: EntityHealthChangedAfterEvent) {
   const { entity, oldValue } = event
   let newValue = event.newValue
   if (newValue > oldValue) {
@@ -162,16 +188,12 @@ world.afterEvents.entityHealthChanged.subscribe(event => {
       tooltip_damage_indicator(entity, Math.floor(newValue - oldValue))
     }
   }
-})
-
-world.beforeEvents.playerInteractWithEntity.subscribe(event => {
-  system.run(() => {
-    // display_name
-    const { target } = event
-    tooltip_display_name(target, `§l§f${target.typeId}`)
-  })
-})
-world.afterEvents.entityDie.subscribe(event => {
+}
+function onplayerinteractentity(event: PlayerInteractWithEntityBeforeEvent) {
+  const { target } = event
+  tooltip_display_name(target, `§l§f${target.typeId}`)
+}
+function onentitydie(event: EntityDieAfterEvent) {
   const { damageSource, deadEntity } = event
   if (damageSource.damagingEntity?.typeId === MinecraftEntityTypes.Player) {
     const experience = <number>deadEntity.getProperty('sao:exp') || 0
@@ -191,30 +213,13 @@ world.afterEvents.entityDie.subscribe(event => {
       // player_col_gain(player, col)
     }
   }
-})
-function main_tick() {
-  for (const player of world.getAllPlayers()) {
-    // exhaustion
-    const previous_exhaustion = <number>player.getDynamicProperty('sao:exhaustion') || 0
-    const exhaustion = player.getComponent(EntityComponentTypes.Exhaustion)
-    if (previous_exhaustion !== exhaustion.currentValue) {
-      player.setDynamicProperty('sao:exhaustion', exhaustion.currentValue)
-      const value = exhaustion.currentValue - previous_exhaustion
-      if (value > 0 && value < 1) {
-        player_stamina_set(player, player_stamina_get(player) - value)
-      }
-    }
-    // stamina_regen
-    if (system.currentTick % 80 === 0) {
-      const agility = player_agility_get(player)
-      const max_stamina = agility * STAMINA_MODIFIER
-      const stamina_regen = agility * STAMINA_REGEN_RATE
-      const player_stamina = player_stamina_get(player)
-      const stamina = Math.min(player_stamina + stamina_regen, max_stamina)
-      if (stamina != player_stamina) {
-        player_stamina_set(player, stamina)
-      }
-    }
-  }
 }
+
+system.beforeEvents.startup.subscribe(onstartup)
+world.afterEvents.playerSpawn.subscribe(onplayerspawn)
+world.beforeEvents.itemUse.subscribe(onitemuse)
+world.afterEvents.entityHurt.subscribe(onentityhurt)
+world.afterEvents.entityHealthChanged.subscribe(onhealthchange)
+world.beforeEvents.playerInteractWithEntity.subscribe(onplayerinteractentity)
+world.afterEvents.entityDie.subscribe(onentitydie)
 system.runInterval(main_tick)
