@@ -11,9 +11,6 @@
         "sao_health_bar": "textures/ui/health_bar",
         "sao_cursor": "textures/ui/cursor_red"
       },
-      "particle_effects": {
-        "sao_death": "sao:death_emitter"
-      },
       "geometry": {
         "default": "geometry.hoglin",
         "sao_health_bar": "geometry.sao_health_bar",
@@ -46,8 +43,7 @@
         "walk": "animation.hoglin.walk",
         "look_at_target": "animation.hoglin.look_at_target",
         "attack": "animation.hoglin.attack",
-        "sao_cursor_rotate": "animation.sao_cursor.rotate",
-        "sao_death": "animation.sao.death"
+        "sao_cursor_rotate": "animation.sao_cursor.rotate"
       },
       "render_controllers": [
         "controller.render.hoglin",
