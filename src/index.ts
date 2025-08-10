@@ -10,7 +10,7 @@ import {
   player_level_get,
   player_max_hp_get,
   player_max_stamina_get,
-  player_reset,
+  player_inicialize,
   player_stamina_get,
   player_stamina_set,
   player_strenght_get,
@@ -19,12 +19,12 @@ import {
   STAMINA_REGEN_RATE,
   STRENGHT_MODIFIER
 } from 'player'
-import { item_t } from 'types'
+import { item_t, sao_entity_t } from 'types'
 import { tooltip_damage_indicator, tooltip_display_name } from 'tooltip'
 
 function main_tick() {
   for (const player of world.getAllPlayers()) {
-    // exhaustion
+    // player_exhaustion
     const previous_exhaustion = <number>player.getDynamicProperty('sao:exhaustion') || 0
     const exhaustion = player.getComponent(EntityComponentTypes.Exhaustion)
     if (previous_exhaustion !== exhaustion.currentValue) {
@@ -32,17 +32,6 @@ function main_tick() {
       const value = exhaustion.currentValue - previous_exhaustion
       if (value > 0 && value < 1) {
         player_stamina_set(player, player_stamina_get(player) - value)
-      }
-    }
-    // stamina_regen
-    if (system.currentTick % 80 === 0) {
-      const agility = player_agility_get(player)
-      const max_stamina = agility * STAMINA_MODIFIER
-      const stamina_regen = agility * STAMINA_REGEN_RATE
-      const player_stamina = player_stamina_get(player)
-      const stamina = Math.min(player_stamina + stamina_regen, max_stamina)
-      if (stamina != player_stamina) {
-        player_stamina_set(player, stamina)
       }
     }
   }
@@ -108,9 +97,7 @@ function onstartup(event: StartupEvent) {
     permissionLevel: CommandPermissionLevel.Any,
     cheatsRequired: false,
   }, event => {
-    system.run(() => {
-      player_reset(<Player>event.sourceEntity)
-    })
+    player_inicialize(<Player>event.sourceEntity)
     return { status: CustomCommandStatus.Success }
   })
   customCommandRegistry.registerCommand({
@@ -134,11 +121,11 @@ function onstartup(event: StartupEvent) {
 function onplayerspawn(event: PlayerSpawnAfterEvent) {
   const { player, initialSpawn } = event
   // player_inicialize
-  const level = player_level_get(player)
   if (initialSpawn) {
-    player_reset(player)
+    player_inicialize(player)
     menu_inicialize(player)
   }
+  const level = player_level_get(player)
   player_hp_set(player, player_hp_from_level(level))
 }
 function onitemuse(event: ItemUseBeforeEvent) {
@@ -157,12 +144,9 @@ function onentityhurt(event: EntityHurtAfterEvent) {
     && damageSource.cause === EntityDamageCause.entityAttack
   ) {
     const player = <Player>damageSource.damagingEntity
-    additional_damage = player_strenght_get(player) * STRENGHT_MODIFIER
-    const stamina = player_stamina_get(player) - additional_damage
-    if (stamina >= 0) {
-      player_stamina_set(player, stamina)
-    } else {
-      additional_damage = 0
+    const stamina = player_stamina_get(player)
+    if (stamina >= 1) {
+      additional_damage = player_strenght_get(player) * STRENGHT_MODIFIER
     }
   }
   const target_health = hurtEntity.getComponent(EntityComponentTypes.Health)
@@ -182,6 +166,15 @@ function onhealthchange(event: EntityHealthChangedAfterEvent) {
       const player = <Player>entity
       newValue = Math.min(newValue, player_max_hp_get(player))
       player_hp_set(player, newValue)
+      // stamina_regen
+      const agility = player_agility_get(player)
+      const max_stamina = agility * STAMINA_MODIFIER
+      const stamina_regen = agility * STAMINA_REGEN_RATE
+      const player_stamina = player_stamina_get(player)
+      const stamina = Math.min(player_stamina + stamina_regen, max_stamina)
+      if (stamina != player_stamina) {
+        player_stamina_set(player, stamina)
+      }
     }
     const result = Math.floor(newValue - oldValue)
     if (result > 0) {
@@ -191,11 +184,17 @@ function onhealthchange(event: EntityHealthChangedAfterEvent) {
 }
 function onplayerinteractentity(event: PlayerInteractWithEntityBeforeEvent) {
   const { target } = event
-  tooltip_display_name(target, `§l§f${target.typeId}`)
+  const entity_name = sao_entity_t[target.typeId]
+  if (entity_name) {
+    tooltip_display_name(target, `§l§f${entity_name}`)
+  }
 }
 function onentitydie(event: EntityDieAfterEvent) {
   const { damageSource, deadEntity } = event
-  if (damageSource.damagingEntity?.typeId === MinecraftEntityTypes.Player) {
+  if (
+    damageSource.damagingEntity?.typeId === MinecraftEntityTypes.Player
+    && damageSource.cause === EntityDamageCause.entityAttack
+  ) {
     const experience = <number>deadEntity.getProperty('sao:exp') || 0
     const col = <number>deadEntity.getProperty('sao:col') || 0
     tooltip_display_name(

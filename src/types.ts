@@ -126,3 +126,7 @@ export enum cursor_t {
    */
   black = 'black'
 }
+
+export enum sao_entity_t {
+  "sao:frenzy_boar" = "Frenzy Boar"
+}

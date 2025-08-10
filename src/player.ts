@@ -6,7 +6,7 @@ export const STAMINA_MODIFIER = 3.5
 export const STAMINA_REGEN_RATE = 1
 export const STRENGHT_MODIFIER = 2.5
 
-export function player_reset(player: Player) {
+export function player_inicialize(player: Player) {
   player_level_set(player, 1)
   player_xp_set(player, 0)
   player_stamina_set(player, STAMINA_MODIFIER)

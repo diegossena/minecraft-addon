@@ -84,6 +84,12 @@
       }
     },
     "components": {
+      "minecraft:behavior.leap_at_target": {
+        "priority": 4,
+        "yd": 0.0,
+        "must_be_on_ground": false,
+        "target_dist": 0.3
+      },
       "minecraft:collision_box": {
         "width": 1.0,
         "height": 1.5
@@ -95,17 +101,15 @@
       "minecraft:type_family": {
         "family": [
           "pig",
-          "sao",
-          "mob"
+          "mob",
+          "sao"
         ]
       },
       "minecraft:breathable": {
         "total_supply": 15,
         "suffocate_time": 0
       },
-      "minecraft:nameable": {
-        "always_show": true
-      },
+      "minecraft:nameable": {},
       "minecraft:hurt_on_condition": {
         "damage_conditions": [
           {
