@@ -55,8 +55,7 @@ development_resource_packs
 - Mostrar a barra de HP do mob apenas enquanto ele estiver tomando dano - OK
 - Colocar o cursor que é um cristal na cabeça do mob - OK
 - Aparecer cursor e barra de HP da entidade ao olhar para eles - OK
-- Colocar barra de HP a esquerda da entidade
-- Criar stamina (SP 100); quanto mais stregth mais stamina é gasta; stamina gasta menos com mais agility
-- Fazer animação de morte
-- Criar andares
+- Colocar barra de HP a esquerda da entidade - OK
+- Criar stamina - OK
+- Fazer animação de morte - OK
 - Alterar cor da barra de vida (amarelo <= 50%) (vermelho <= 30%)
