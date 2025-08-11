@@ -4,6 +4,7 @@
     "description": {
       "identifier": "sao:ragout_rabbit",
       "runtime_identifier": "minecraft:rabbit",
+      "spawn_category": "creature",
       "is_spawnable": true,
       "is_summonable": true,
       "is_experimental": false,
