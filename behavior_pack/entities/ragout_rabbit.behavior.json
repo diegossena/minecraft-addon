@@ -16,10 +16,10 @@
         "sao:exp": {
           "type": "int",
           "range": [
-            9,
-            13
+            0,
+            12
           ],
-          "default": "Math.Random(9,13)"
+          "default": 12
         },
         "sao:col": {
           "type": "int",
@@ -43,13 +43,26 @@
       }
     },
     "components": {
-      "minecraft:experience_reward": {
-        "on_death": "query.last_hit_by_player ? Math.Random(9,13) : 0"
+      "minecraft:health": {
+        "value": 120,
+        "max": 120
+      },
+      "minecraft:movement": {
+        "value": 0.4
       },
       "minecraft:loot": {
         "table": "loot_tables/ragout_rabbit.json"
       },
-      "minecraft:is_hidden_when_invisible": {},
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? q.property('sao:exp') : 0"
+      },
+      "minecraft:scale": {
+        "value": 0.6
+      },
+      "minecraft:collision_box": {
+        "width": 0.67,
+        "height": 0.67
+      },
       "minecraft:type_family": {
         "family": [
           "rabbit",
@@ -57,18 +70,12 @@
           "sao"
         ]
       },
+      "minecraft:is_hidden_when_invisible": {},
       "minecraft:breathable": {
         "total_supply": 15,
         "suffocate_time": 0
       },
       "minecraft:nameable": {},
-      "minecraft:health": {
-        "value": 120,
-        "max": 120
-      },
-      "minecraft:scale": {
-        "value": 0.6
-      },
       "minecraft:hurt_on_condition": {
         "damage_conditions": [
           {
@@ -82,13 +89,6 @@
             "damage_per_tick": 4
           }
         ]
-      },
-      "minecraft:collision_box": {
-        "width": 0.67,
-        "height": 0.67
-      },
-      "minecraft:movement": {
-        "value": 0.3
       },
       "minecraft:navigation.walk": {
         "can_path_over_water": true,
@@ -134,11 +134,13 @@
         ]
       },
       "minecraft:behavior.random_stroll": {
-        "priority": 3,
-        "speed_multiplier": 0.8
+        "priority": 3
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 4
       },
       "minecraft:behavior.look_at_player": {
-        "priority": 4
+        "priority": 5
       }
     },
     "events": {
