@@ -1,0 +1,27 @@
+{
+  "entity_sounds": {
+    "entities": {
+      "sao:frenzy_boar": {
+        "events": {
+          "ambient": "mob.hoglin.ambient",
+          "angry": "mob.hoglin.angry",
+          "attack": "mob.hoglin.attack",
+          "death": "",
+          "eat": "",
+          "hurt": "mob.hoglin.hurt",
+          "retreat": "mob.hoglin.retreat",
+          "step": {
+            "pitch": 1.0,
+            "sound": "mob.hoglin.step",
+            "volume": 1.0
+          }
+        },
+        "pitch": [
+          0.80,
+          1.20
+        ],
+        "volume": 1.0
+      }
+    }
+  }
+}

@@ -36,14 +36,21 @@
           "look_at_target",
           "walk",
           "attack",
-          "sao_cursor_rotate"
+          "sao_cursor_rotate",
+          {
+            "sao_death_explosion": "!q.is_alive"
+          }
         ]
       },
       "animations": {
         "walk": "animation.hoglin.walk",
         "look_at_target": "animation.hoglin.look_at_target",
         "attack": "animation.hoglin.attack",
-        "sao_cursor_rotate": "animation.sao_cursor.rotate"
+        "sao_cursor_rotate": "animation.sao.cursor_rotate",
+        "sao_death_explosion": "animation.sao.death_explosion"
+      },
+      "sound_effects": {
+        "sao_death_explosion": "entity.sao.death_explosion"
       },
       "render_controllers": [
         "controller.render.hoglin",

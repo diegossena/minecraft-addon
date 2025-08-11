@@ -1,0 +1,13 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.sao.death_explosion": {
+      "animation_length": 0.9,
+      "sound_effects": {
+        "0.8": {
+          "effect": "sao_death_explosion"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "format_version": "1.20.20",
+  "sound_definitions": {
+    "entity.sao.death_explosion": {
+      "category": "ambient",
+      "max_distance": 10,
+      "min_distance": null,
+      "sounds": [
+        {
+          "name": "sounds/death_explosion",
+          "volume": 1.0
+        }
+      ]
+    }
+  }
+}
