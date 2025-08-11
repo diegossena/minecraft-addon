@@ -2,28 +2,25 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "sao:frenzy_boar",
+      "identifier": "sao:ragout_rabbit",
       "materials": {
-        "default": "hoglin"
+        "default": "entity_alphatest"
       },
       "textures": {
-        "default": "textures/entity/frenzy_boar",
+        "default": "textures/entity/rabbit/white",
         "sao_health_bar": "textures/entity/health_bar",
         "sao_cursor": "textures/entity/cursor_red"
       },
       "geometry": {
-        "default": "geometry.hoglin",
+        "default": "geometry.rabbit.v1.8",
         "sao_health_bar": "geometry.sao_health_bar",
         "sao_cursor": "geometry.sao_cursor"
       },
       "spawn_egg": {
-        "texture": "spawn_egg_frenzy_boar"
+        "texture": "spawn_egg_ragout_rabbit"
       },
       "scripts": {
         "pre_animation": [
-          "v.tcos_right_side = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / v.gliding_speed_value) * 57.3;",
-          "v.tcos_left_side = -v.tcos_right_side;",
-          "v.attack_head_rot =  Math.sin(v.attack_time * 180.0) * -37.3;",
           // is_looking_at
           "v.looking_at_center_offset = .5;", // (+ is upward, - is downward)
           "v.looking_at_horizontal_angle = 120;",
@@ -33,9 +30,8 @@
           "v.sao_health=q.is_alive&&(q.property('sao:health_bar') || v.looking_at_entity)&&q.distance_from_camera<=10 ? q.health/q.max_health : 0;"
         ],
         "animate": [
+          "move",
           "look_at_target",
-          "walk",
-          "attack",
           "sao_cursor_rotate",
           {
             "sao_death_explosion": "!q.is_alive"
@@ -43,9 +39,8 @@
         ]
       },
       "animations": {
-        "walk": "animation.hoglin.walk",
-        "look_at_target": "animation.hoglin.look_at_target",
-        "attack": "animation.hoglin.attack",
+        "move": "animation.rabbit.move",
+        "look_at_target": "animation.common.look_at_target",
         "sao_cursor_rotate": "animation.sao.cursor.rotate",
         "sao_death_explosion": "animation.sao.death.explosion"
       },
@@ -53,7 +48,7 @@
         "sao_death_explosion": "ambient.sao.death.explosion"
       },
       "render_controllers": [
-        "controller.render.hoglin",
+        "controller.render.default",
         "controller.render.sao_health_bar",
         "controller.render.sao_cursor"
       ]

@@ -1,12 +1,16 @@
 ## entities
 
 entity.sao:frenzy_boar.name=Frenzy Boar
+entity.sao:ragout_rabbit.name=Ragout Rabbit
+entity.sao:dire_wolf.name=Dire Wolf
 
 ## items
 
 item.sao:menu=Menu
 
 item.spawn_egg.entity.sao:frenzy_boar.name=Frenzy Boar Spawn Egg
+item.spawn_egg.entity.sao:ragout_rabbit.name=Ragout Rabbit Spawn Egg
+item.spawn_egg.entity.sao:dire_wolf.name=Dire Wolf Spawn Egg
 ## cursors
 
 sao.cursor.green=§2Green

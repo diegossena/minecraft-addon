@@ -7,6 +7,12 @@
     },
     "spawn_egg_frenzy_boar": {
       "textures": "textures/items/spawn_eggs/spawn_egg_frenzy_boar"
+    },
+    "spawn_egg_ragout_rabbit": {
+      "textures": "textures/items/egg_rabbit"
+    },
+    "spawn_egg_dire_wolf": {
+      "textures": "textures/items/egg_wolf"
     }
   }
 }

@@ -2,28 +2,34 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "sao:frenzy_boar",
+      "identifier": "sao:dire_wolf",
       "materials": {
-        "default": "hoglin"
+        "default": "wolf"
       },
       "textures": {
-        "default": "textures/entity/frenzy_boar",
+        "default": "textures/entity/dire_wolf",
         "sao_health_bar": "textures/entity/health_bar",
         "sao_cursor": "textures/entity/cursor_red"
       },
       "geometry": {
-        "default": "geometry.hoglin",
+        "default": "geometry.wolf",
         "sao_health_bar": "geometry.sao_health_bar",
         "sao_cursor": "geometry.sao_cursor"
       },
       "spawn_egg": {
-        "texture": "spawn_egg_frenzy_boar"
+        "texture": "spawn_egg_dire_wolf"
       },
       "scripts": {
         "pre_animation": [
-          "v.tcos_right_side = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / v.gliding_speed_value) * 57.3;",
-          "v.tcos_left_side = -v.tcos_right_side;",
-          "v.attack_head_rot =  Math.sin(v.attack_time * 180.0) * -37.3;",
+          "variable.body_shake_angle = 0.05 * query.frame_alpha + query.shake_angle;",
+          "variable.body_roll_progress = Math.clamp((variable.body_shake_angle - 0.16) / 1.8, 0, 1);",
+          "variable.body_rot_z = Math.sin(variable.body_roll_progress * 180) * Math.sin(variable.body_roll_progress * 1980) * 27;",
+          "variable.upper_body_roll_progress = Math.clamp((variable.body_shake_angle - 0.08) / 1.8, 0, 1);",
+          "variable.upper_body_rot_z = (Math.sin(variable.upper_body_roll_progress * 180) * Math.sin(variable.upper_body_roll_progress * 1980) * 27) - variable.body_rot_z;",
+          "variable.tail_roll_progress = Math.clamp((variable.body_shake_angle - 0.2) / 1.8, 0, 1);",
+          "variable.tail_rot_z = (Math.sin(variable.tail_roll_progress * 180) * Math.sin(variable.tail_roll_progress * 1980) * 27) - variable.body_rot_z;",
+          "variable.head_roll_progress = Math.clamp(variable.body_shake_angle / 1.8, 0, 1);",
+          "variable.head_rot_z = (Math.sin(variable.head_roll_progress * 180) * Math.sin(variable.head_roll_progress * 1980) * 27) - variable.body_rot_z;",
           // is_looking_at
           "v.looking_at_center_offset = .5;", // (+ is upward, - is downward)
           "v.looking_at_horizontal_angle = 120;",
@@ -33,9 +39,12 @@
           "v.sao_health=q.is_alive&&(q.property('sao:health_bar') || v.looking_at_entity)&&q.distance_from_camera<=10 ? q.health/q.max_health : 0;"
         ],
         "animate": [
+          "setup",
           "look_at_target",
-          "walk",
-          "attack",
+          "leg_default",
+          "tail_default",
+          "head_rot_z",
+          "shaking",
           "sao_cursor_rotate",
           {
             "sao_death_explosion": "!q.is_alive"
@@ -43,9 +52,12 @@
         ]
       },
       "animations": {
-        "walk": "animation.hoglin.walk",
-        "look_at_target": "animation.hoglin.look_at_target",
-        "attack": "animation.hoglin.attack",
+        "setup": "animation.wolf.setup",
+        "look_at_target": "animation.common.look_at_target",
+        "head_rot_z": "animation.wolf.head_rot_z",
+        "tail_default": "animation.wolf.tail_default",
+        "shaking": "animation.wolf.shaking",
+        "leg_default": "animation.wolf.leg_default",
         "sao_cursor_rotate": "animation.sao.cursor.rotate",
         "sao_death_explosion": "animation.sao.death.explosion"
       },
@@ -53,7 +65,7 @@
         "sao_death_explosion": "ambient.sao.death.explosion"
       },
       "render_controllers": [
-        "controller.render.hoglin",
+        "controller.render.default",
         "controller.render.sao_health_bar",
         "controller.render.sao_cursor"
       ]

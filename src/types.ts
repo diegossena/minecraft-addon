@@ -128,5 +128,6 @@ export enum cursor_t {
 }
 
 export enum sao_entity_t {
-  "sao:frenzy_boar" = "Frenzy Boar"
+  "sao:frenzy_boar" = "Frenzy Boar",
+  "sao:ragout_rabbit" = "Ragout Rabbit"
 }

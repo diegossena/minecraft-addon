@@ -27,7 +27,7 @@
       {
         "health_bar@sao_components.bar": {
           "$prefix": "health_bar:",
-          "$texture": "textures/ui/health_bar",
+          "$texture": "textures/entity/health_bar",
           "offset": [
             40.64,
             7.66

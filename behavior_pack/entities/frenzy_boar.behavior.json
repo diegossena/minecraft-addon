@@ -15,10 +15,10 @@
         "sao:exp": {
           "type": "int",
           "range": [
-            4,
-            24
+            0,
+            50
           ],
-          "default": 4
+          "default": 50
         },
         "sao:col": {
           "type": "int",
@@ -31,48 +31,6 @@
       }
     },
     "component_groups": {
-      "sao:level_1": {
-        "minecraft:health": {
-          "value": 130,
-          "max": 130
-        },
-        "minecraft:experience_reward": {
-          "on_death": "query.last_hit_by_player ? Math.Random(4,7) : 0"
-        },
-        "minecraft:scale": {
-          "value": 0.5
-        },
-        "minecraft:movement": {
-          "value": 0.25
-        },
-        "minecraft:attack": {
-          "damage": 3
-        },
-        "minecraft:variant": {
-          "value": 0
-        }
-      },
-      "sao:level_7": {
-        "minecraft:variant": {
-          "value": 1
-        },
-        "minecraft:health": {
-          "value": 300,
-          "max": 300
-        },
-        "minecraft:experience_reward": {
-          "on_death": "query.last_hit_by_player ? Math.Random(24,23) : 0"
-        },
-        "minecraft:scale": {
-          "value": 1.0
-        },
-        "minecraft:movement": {
-          "value": 0.35
-        },
-        "minecraft:attack": {
-          "damage": 19
-        }
-      },
       "sao:health_bar_timer": {
         "minecraft:timer": {
           "time": 5,
@@ -84,18 +42,28 @@
       }
     },
     "components": {
-      "minecraft:behavior.leap_at_target": {
-        "priority": 4,
-        "yd": 0.0,
-        "must_be_on_ground": false,
-        "target_dist": 0.3
+      "minecraft:health": {
+        "value": 130,
+        "max": 130
+      },
+      "minecraft:attack": {
+        "damage": 5
+      },
+      "minecraft:movement": {
+        "value": 0.2
+      },
+      "minecraft:loot": {
+        "table": "loot_tables/frenzy_boar.json"
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? q.property('sao:exp') : 0"
+      },
+      "minecraft:scale": {
+        "value": 0.5
       },
       "minecraft:collision_box": {
         "width": 1.0,
         "height": 1.5
-      },
-      "minecraft:loot": {
-        "table": "loot_tables/frenzy_boar.json"
       },
       "minecraft:is_hidden_when_invisible": {},
       "minecraft:type_family": {
@@ -124,7 +92,6 @@
       },
       "minecraft:navigation.walk": {
         "can_path_over_water": true,
-        "avoid_water": true,
         "avoid_damage_blocks": true
       },
       "minecraft:movement.basic": {},
@@ -136,39 +103,26 @@
       "minecraft:despawn": {
         "despawn_from_distance": {}
       },
-      "minecraft:behavior.melee_box_attack": {
-        "priority": 3
+      "minecraft:physics": {},
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
       },
-      "minecraft:behavior.float": {
-        "priority": 2
-      },
-      "minecraft:behavior.random_stroll": {
-        "priority": 7,
-        "speed_multiplier": 1
-      },
-      "minecraft:behavior.look_at_player": {
-        "priority": 8,
-        "look_distance": 6.0,
-        "probability": 0.02
-      },
-      "minecraft:behavior.random_look_around": {
-        "priority": 9
-      },
-      "minecraft:behavior.hurt_by_target": {
-        "priority": 1,
-        "entity_types": [
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:damage_sensor": {
+        "triggers": [
           {
-            "filters": {
-              "test": "is_family",
-              "subject": "other",
-              "operator": "!=",
-              "value": "breeze"
+            "on_damage": {
+              "event": "sao:health_bar_show"
             }
           }
         ]
       },
+      "minecraft:behavior.float": {
+        "priority": 0
+      },
       "minecraft:behavior.nearest_attackable_target": {
-        "priority": 2,
+        "priority": 1,
         "must_see": true,
         "reselect_targets": true,
         "within_radius": 25.0,
@@ -188,20 +142,26 @@
           }
         ]
       },
-      "minecraft:physics": {},
-      "minecraft:pushable": {
-        "is_pushable": true,
-        "is_pushable_by_piston": true
+      "minecraft:behavior.melee_box_attack": {
+        "priority": 2
       },
-      "minecraft:conditional_bandwidth_optimization": {},
-      "minecraft:damage_sensor": {
-        "triggers": [
-          {
-            "on_damage": {
-              "event": "sao:health_bar_show"
-            }
-          }
-        ]
+      "minecraft:behavior.leap_at_target": {
+        "priority": 3,
+        "yd": 0.0,
+        "must_be_on_ground": false,
+        "target_dist": 0.3
+      },
+      "minecraft:behavior.look_at_player": {
+        "priority": 4,
+        "look_distance": 6.0,
+        "probability": 0.02
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 6
       }
     },
     "events": {
@@ -224,32 +184,6 @@
             "sao:health_bar_timer"
           ]
         }
-      },
-      "minecraft:entity_spawned": {
-        "randomize": [
-          {
-            "weight": 70,
-            "set_property": {
-              "sao:exp": "Math.Random(4,7)"
-            },
-            "add": {
-              "component_groups": [
-                "sao:level_1"
-              ]
-            }
-          },
-          {
-            "weight": 30,
-            "set_property": {
-              "sao:exp": "Math.Random(23,24)"
-            },
-            "add": {
-              "component_groups": [
-                "sao:level_7"
-              ]
-            }
-          }
-        ]
       }
     }
   }
